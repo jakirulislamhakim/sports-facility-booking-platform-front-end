@@ -1,0 +1,38 @@
+.responsive-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 576px) {
+  /* Mobile */
+  .responsive-container {
+    max-width: 100%;
+    padding: 8px;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  /* Tablet */
+  .responsive-container {
+    max-width: 720px;
+    padding: 16px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  /* Small Desktop */
+  .responsive-container {
+    max-width: 960px;
+    padding: 24px;
+  }
+}
+
+@media (min-width: 993px) {
+  /* Large Desktop */
+  .responsive-container {
+    max-width: 1140px;
+    padding: 32px;
+  }
+}

@@ -1,0 +1,51 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+  /* background-color: #aee794; */
+  max-width: 1220px;
+  border-radius: 5px;
+}
+
+.navbar-logo h2 {
+  color: white;
+  margin: 0;
+}
+
+.desktop-menu {
+  display: flex;
+  background-color: #aee794;
+  justify-content: flex-center;
+}
+
+.menu-button {
+  display: none;
+  /* color: white; */
+}
+.singInSingUp {
+    display: block;
+    color: white;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .desktop-menu {
+    display: none;
+  }
+
+  .menu-button {
+    display: block;
+  }
+  .singInSingUp {
+    display: none;
+  }
+}
+
+/* @media (max-width: 1220px) {
+  /* Large Desktop */
+  /* .navbar {
+    max-width: 1140px;
+  } */
+/* }  */
+*/
