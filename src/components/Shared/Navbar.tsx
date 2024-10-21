@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { Menu, Button, Drawer, Avatar } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
+import { useMediaQuery } from 'react-responsive'; // Import useMediaQuery
 import '../../styles/navbar.css';
 import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
 
+  // Use react-responsive to detect if the screen width is 768px or less
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
+  // Handle drawer open/close
   const showDrawer = () => {
     setVisible(true);
   };
@@ -35,15 +40,19 @@ const Navbar = () => {
 
         <div className="navbar-menu">
           {/* Desktop Menu */}
-          <Menu mode="horizontal" className="desktop-menu" items={menuItems} />
+          {!isMobile && (
+            <Menu mode="horizontal" className="desktop-menu" items={menuItems} />
+          )}
 
           {/* Mobile Drawer */}
-          <Button
-            className="menu-button"
-            type="text"
-            icon={<MenuOutlined />}
-            onClick={showDrawer}
-          />
+          {isMobile && (
+            <Button
+              className="menu-button"
+              type="text"
+              icon={<MenuOutlined />}
+              onClick={showDrawer}
+            />
+          )}
 
           <Drawer title="MyLogo" placement="right" open={visible} onClose={onClose}>
             <Menu
@@ -61,7 +70,7 @@ const Navbar = () => {
             <Button type="primary">Login</Button>
           </NavLink>
         </div>
-      </nav>{' '}
+      </nav>
     </div>
   );
 };

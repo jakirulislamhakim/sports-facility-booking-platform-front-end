@@ -1,9 +1,11 @@
-import Home from '../pages/Home';
+import { Outlet } from 'react-router-dom';
+import Navbar from '../components/Shared/Navbar';
 
 const MainLayout = () => {
   return (
     <>
-      <Home />
+      <Navbar />
+      <Outlet />
     </>
   );
 };

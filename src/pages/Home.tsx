@@ -1,11 +1,9 @@
-import { Outlet } from 'react-router-dom';
-import Navbar from '../components/Shared/Navbar';
+import HeroSection from '../components/Home/HeroSections';
 
 const Home = () => {
   return (
     <>
-      <Navbar />
-      <Outlet />
+      <HeroSection />
     </>
   );
 };
