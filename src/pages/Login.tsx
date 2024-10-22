@@ -6,13 +6,29 @@ import FormSubmitBtn from '../components/Form/FormSubmitBtn';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginValidationSchema } from '../validationSchmema/loginValidationSchema';
+import { toast } from 'sonner';
+import { useLoginUserMutation } from '../redux/features/auth/authApi';
+import { TApiErrorResponse } from '../types';
 
 const { Title, Link, Text } = Typography;
 
 const LoginForm = () => {
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log('Login Data:', data);
+  const [loginUser, { isLoading }] = useLoginUserMutation();
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     // Handle login logic here
+    const toastId = toast.loading('Logging in...');
+    try {
+      const res = await loginUser(data).unwrap();
+
+      if (res.success) toast.success(res.message, { id: toastId });
+    } catch (error) {
+      if (error instanceof Error) {
+        return toast.error(error.message, { id: toastId });
+      }
+      const err = error as TApiErrorResponse;
+      toast.error(err.data.message, { id: toastId });
+    }
   };
 
   return (
@@ -48,7 +64,7 @@ const LoginForm = () => {
               placeHolder="enter your password.."
             />
 
-            <FormSubmitBtn btnText="Login" />
+            <FormSubmitBtn btnText="Login" disabled={isLoading} />
           </RootForm>
 
           {/* Registration Link */}
