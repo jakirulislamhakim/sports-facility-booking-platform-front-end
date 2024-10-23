@@ -16,13 +16,14 @@ type TFacilityCardProps = {
 };
 
 const FacilityCard = ({ facility, isLoading = false }: TFacilityCardProps) => {
+  const { description, image, name, pricePerHour, rating } = facility;
   const isMobile = useMobileResponsive();
 
   return (
     <Badge.Ribbon
       text="Popular"
       color="#f50"
-      style={{ display: facility.rating >= 4.5 ? 'block' : 'none' }}
+      style={{ display: rating >= 4.5 ? 'block' : 'none' }}
     >
       <Card
         loading={isLoading}
@@ -33,8 +34,8 @@ const FacilityCard = ({ facility, isLoading = false }: TFacilityCardProps) => {
         }}
         cover={
           <img
-            alt={facility.name}
-            src={facility.image}
+            alt={name}
+            src={image}
             style={{
               height: isMobile ? 150 : 200,
               objectFit: 'cover',
@@ -61,7 +62,7 @@ const FacilityCard = ({ facility, isLoading = false }: TFacilityCardProps) => {
                   fontSize: isMobile ? '16px' : '18px',
                 }}
               >
-                {facility.name}
+                {name}
               </Title>
             </div>
           }
@@ -74,19 +75,19 @@ const FacilityCard = ({ facility, isLoading = false }: TFacilityCardProps) => {
                   fontSize: isMobile ? '12px' : '14px',
                 }}
               >
-                {facility.description}
+                {description}
               </Paragraph>
               <div style={{ marginBottom: 12 }}>
                 <Rate
                   disabled
-                  defaultValue={facility.rating}
+                  defaultValue={rating}
                   allowHalf
                   style={{ fontSize: isMobile ? 12 : 14 }}
                 />
                 <span
                   style={{ marginLeft: 8, fontSize: isMobile ? '12px' : '14px' }}
                 >
-                  {facility.rating}
+                  {rating}
                 </span>
               </div>
               <div
@@ -98,7 +99,7 @@ const FacilityCard = ({ facility, isLoading = false }: TFacilityCardProps) => {
                 }}
               >
                 <span>
-                  <DollarOutlined /> ${facility.pricePerHour}/hour
+                  <DollarOutlined /> ${pricePerHour}/hour
                 </span>
                 <span>
                   <ClockCircleOutlined /> Available Now
