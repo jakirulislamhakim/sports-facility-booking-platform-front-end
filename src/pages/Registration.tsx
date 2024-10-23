@@ -5,23 +5,45 @@ import FormInput from '../components/Form/FormInput';
 import FormSubmitBtn from '../components/Form/FormSubmitBtn';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { registrationValidationSchema } from '../validationSchmema/registrationValidationSchema';
+import { registrationValidationSchema } from '../validationSchema/registrationValidationSchema';
 import { toast } from 'sonner';
 import { useRegistrationUserMutation } from '../redux/features/auth/authApi';
-import { TApiErrorResponse } from '../types';
+import { TApiErrorResponse, TAuthUser } from '../types';
+import { jwtDecode } from 'jwt-decode';
+import { useAppDispatch } from '../redux/hooks';
+import { setUser } from '../redux/features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const { Title, Link, Text } = Typography;
 
 const Registration = () => {
   const [registrationUser, { isLoading }] = useRegistrationUserMutation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
+  // form submission
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const toastId = toast.loading('Creating....');
+    const toastId = toast.loading('Registrations....');
     try {
       const res = await registrationUser(data).unwrap();
       console.log(res);
 
-      if (res.success) toast.success(res.message, { id: toastId });
+      if (res.success) {
+        const { token, message } = res;
+        // decode user from jwt token accessToken
+        const decodedUser = jwtDecode(token) as TAuthUser;
+        // set user in local state
+        dispatch(
+          setUser({
+            user: decodedUser,
+            token: token,
+          })
+        );
+
+        toast.success(message, { id: toastId });
+        // navigate the user home page
+        navigate('/', { replace: true });
+      }
     } catch (error) {
       if (error instanceof Error) {
         return toast.error(error.message, { id: toastId });
@@ -59,12 +81,12 @@ const Registration = () => {
             <FormInput name="name" label="Name" placeHolder="Enter your name" />
             <FormInput
               name="phone"
-              label="phone Number"
+              label="Phone Number"
               placeHolder="Enter your phone number"
             />
             <FormInput
               name="address"
-              label="address"
+              label="Address"
               placeHolder="Enter your address"
             />
             <FormInput name="email" label="Email" placeHolder="Enter your email" />
@@ -72,7 +94,7 @@ const Registration = () => {
               name="password"
               label="Password"
               type="password"
-              placeHolder="enter your password.."
+              placeHolder="Enter your password.."
             />
 
             <FormSubmitBtn btnText="Registration" disabled={isLoading} />

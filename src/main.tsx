@@ -4,14 +4,17 @@ import './index.css';
 import { RouterProvider } from 'react-router-dom';
 import router from './routes/routes';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
+import { persistor, store } from './redux/store';
 import { Toaster } from 'sonner';
+import { PersistGate } from 'redux-persist/integration/react';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
     </Provider>
-    <Toaster position="top-center" duration={4000} richColors  />
+    <Toaster position="top-center" duration={3000} richColors />
   </StrictMode>
 );

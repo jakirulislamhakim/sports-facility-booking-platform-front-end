@@ -5,23 +5,44 @@ import FormInput from '../components/Form/FormInput';
 import FormSubmitBtn from '../components/Form/FormSubmitBtn';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginValidationSchema } from '../validationSchmema/loginValidationSchema';
+import { loginValidationSchema } from '../validationSchema/loginValidationSchema';
 import { toast } from 'sonner';
 import { useLoginUserMutation } from '../redux/features/auth/authApi';
-import { TApiErrorResponse } from '../types';
+import { TApiErrorResponse, TAuthUser } from '../types';
+import { useAppDispatch } from '../redux/hooks';
+import { jwtDecode } from 'jwt-decode';
+import { setUser } from '../redux/features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const { Title, Link, Text } = Typography;
 
 const LoginForm = () => {
   const [loginUser, { isLoading }] = useLoginUserMutation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
+  // form submission
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     // Handle login logic here
     const toastId = toast.loading('Logging in...');
     try {
       const res = await loginUser(data).unwrap();
 
-      if (res.success) toast.success(res.message, { id: toastId });
+      if (res.success) {
+        const { token, message } = res;
+        // decode user from jwt token accessToken
+        const decodedUser = jwtDecode(token) as TAuthUser;
+        // set user in local state
+        dispatch(
+          setUser({
+            user: decodedUser,
+            token: token,
+          })
+        );
+
+        toast.success(message, { id: toastId });
+        navigate('/', { replace: true });
+      }
     } catch (error) {
       if (error instanceof Error) {
         return toast.error(error.message, { id: toastId });

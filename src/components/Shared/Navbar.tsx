@@ -1,15 +1,22 @@
 import { useState } from 'react';
 import { Menu, Button, Drawer, Avatar } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
-import { useMediaQuery } from 'react-responsive'; // Import useMediaQuery
 import '../../styles/navbar.css';
 import { NavLink } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { RootState } from '../../redux/store';
+import { logoutUser } from '../../redux/features/auth/authSlice';
+import { toast } from 'sonner';
+import { useMobileResponsive } from '../../hooks/useMobileResponsive';
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
+  const user = useAppSelector((state: RootState) => state.auth.user);
+  const dispatch = useAppDispatch();
 
   // Use react-responsive to detect if the screen width is 768px or less
-  const isMobile = useMediaQuery({ maxWidth: 768 });
+  // const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isMobile = useMobileResponsive();
 
   // Handle drawer open/close
   const showDrawer = () => {
@@ -27,6 +34,11 @@ const Navbar = () => {
     { key: 'about', label: <NavLink to={'/about-us'}>About Us</NavLink> },
     { key: 'contact', label: 'Contact Us' },
   ];
+
+  const handleLogoutUser = () => {
+    dispatch(logoutUser());
+    toast.success('Logout Successfully');
+  };
 
   return (
     <div style={{ backgroundColor: '#aee794' }}>
@@ -66,9 +78,15 @@ const Navbar = () => {
         </div>
 
         <div className="singInSingUp">
-          <NavLink to={'/login'}>
-            <Button type="primary">Login</Button>
-          </NavLink>
+          {user ? (
+            <Button onClick={handleLogoutUser} type="primary">
+              Logout
+            </Button>
+          ) : (
+            <NavLink to={`/login`}>
+              <Button type="primary">Login</Button>
+            </NavLink>
+          )}
         </div>
       </nav>
     </div>

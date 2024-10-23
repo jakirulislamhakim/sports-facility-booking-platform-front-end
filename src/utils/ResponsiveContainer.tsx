@@ -1,9 +1,28 @@
 import React from 'react';
 import '../styles/responsiveContainer.css';
+import { useMobileResponsive } from '../hooks/useMobileResponsive';
 
-const ResponsiveContainer = ({ children }: { children: React.ReactNode }) => {
+type TResponsiveContainerProps = {
+  children: React.ReactNode;
+  isNeedPadding?: boolean;
+  background?: string;
+};
+
+const ResponsiveContainer = ({
+  children,
+  isNeedPadding = false,
+  background = '',
+}: TResponsiveContainerProps) => {
+  const isMobile = useMobileResponsive();
+
   return (
-    <div style={{ border: '2px solid red' }} className="responsive-container">
+    <div
+      style={{
+        padding: isNeedPadding ? (isMobile ? '30px 0' : '60px 0') : '0',
+        background,
+      }}
+      className="responsive-container"
+    >
       {children}
     </div>
   );

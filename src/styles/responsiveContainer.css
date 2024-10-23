@@ -32,7 +32,7 @@
 @media (min-width: 993px) {
   /* Large Desktop */
   .responsive-container {
-    max-width: 1140px;
+    max-width: 1200px;
     padding: 8px;
   }
 }
