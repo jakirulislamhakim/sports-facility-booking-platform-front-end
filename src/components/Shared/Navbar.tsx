@@ -41,7 +41,7 @@ const Navbar = () => {
   };
 
   return (
-    <div style={{ backgroundColor: '#aee794' }}>
+    <div style={{ backgroundColor: '#AEF0BA' }}>
       <nav className="navbar" style={{ margin: 'auto' }}>
         <div className="navbar-logo">
           <Avatar

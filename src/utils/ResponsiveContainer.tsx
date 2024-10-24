@@ -18,7 +18,7 @@ const ResponsiveContainer = ({
   return (
     <div
       style={{
-        padding: isNeedPadding ? (isMobile ? '25px 0' : '50px 0') : '0',
+        padding: isNeedPadding ? (isMobile ? '25px 16px' : '50px 8px') : '0',
         background,
       }}
       className="responsive-container"

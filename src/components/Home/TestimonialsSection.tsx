@@ -42,8 +42,15 @@ const TestimonialsSection = () => {
         title="What Our Users Say"
         description=" Read testimonials from sports enthusiasts who have used our platform"
       />
-      <Marquee pauseOnHover={true}>
-        <div style={{ display: 'flex', gap: '24px', flexDirection: 'row' }}>
+      <Marquee pauseOnHover={true} delay={5}>
+        <div
+          style={{
+            display: 'flex',
+            gap: isMobile ? '8px' : '24px',
+            flexDirection: 'row',
+            marginRight: isMobile ? '8px' : '24px',
+          }}
+        >
           {testimonials?.map((testimonial) => (
             <Card
               key={testimonial._id}
@@ -107,6 +114,17 @@ const TestimonialsSection = () => {
           ))}
         </div>
       </Marquee>
+
+      {/* // TODO ->do the section */}
+      {/* <Row justify={'center'}>
+        <Button
+          type="primary"
+          style={{ marginTop: '20px' }}
+          // onClick={handleShareExperience}
+        >
+          Share Your Experience
+        </Button>
+      </Row> */}
     </ResponsiveContainer>
   );
 };
