@@ -5,6 +5,9 @@ import Registration from '../pages/Registration';
 import AboutUs from '../pages/AboutUs';
 import Home from '../pages/Home';
 import ErrorPage from '../pages/ErrorPage';
+import DashboardLayout from '../layout/DashboardLayout';
+import ProtectedRoute from '../layout/ProtectedRoute';
+import WelcomePage from '../pages/user/WelcomePage';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +22,20 @@ const router = createBrowserRouter([
       {
         path: 'about-us',
         element: <AboutUs />,
+      },
+    ],
+  },
+  {
+    path: '/dashboard',
+    element: (
+      <ProtectedRoute>
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <WelcomePage />,
       },
     ],
   },

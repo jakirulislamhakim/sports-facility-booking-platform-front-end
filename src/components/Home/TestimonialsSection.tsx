@@ -1,4 +1,4 @@
-import { Card, Rate, Avatar, Row, Button } from 'antd';
+import { Card, Rate, Avatar, Row, Button, notification } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import Marquee from 'react-fast-marquee';
 import { useMobileResponsive } from '../../hooks/useMobileResponsive';
@@ -13,9 +13,15 @@ import { TApiErrorResponse, TTestimonial } from '../../types';
 import ShareUserExperienceModal from './ShareUserExperienceModal';
 import { SubmitHandler } from 'react-hook-form';
 import { toast } from 'sonner';
+import { useAppSelector } from '../../redux/hooks';
+import { currentToken, currentUser } from '../../redux/features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const TestimonialsSection = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const user = useAppSelector(currentUser);
+  const token = useAppSelector(currentToken);
+  const navigate = useNavigate();
 
   const [imgErrors, setImgErrors] = useState<{ [key: string]: boolean }>({});
   const [addTestimonial] = useAddAllTestimonialsMutation();
@@ -33,7 +39,12 @@ const TestimonialsSection = () => {
   };
 
   const handleShareExperience = async () => {
-    setIsModalVisible(true);
+    if (!token && !user) {
+      return showLoginNotification();
+      // navigate('/login');
+    } else {
+      setIsModalVisible(true);
+    }
   };
 
   // handle submit feedback form
@@ -54,6 +65,31 @@ const TestimonialsSection = () => {
     }
   };
 
+  // for open notification when user is not logged in
+  const showLoginNotification = () => {
+    notification.info({
+      message: 'You need to login',
+      description: 'Please login to share your experience with us.',
+      btn: (
+        <>
+          <Button
+            type="primary"
+            size="small"
+            onClick={() => {
+              notification.destroy('login');
+              navigate('/login');
+            }}
+          >
+            Login Now
+          </Button>
+        </>
+      ),
+      duration: 5000,
+      key: 'login',
+      placement: 'top',
+    });
+  };
+
   return (
     <ResponsiveContainer isNeedPadding={true}>
       <SectionTitle
@@ -69,6 +105,7 @@ const TestimonialsSection = () => {
             marginRight: isMobile ? '8px' : '24px',
           }}
         >
+          {/* show all  individual testimonial card using loop */}
           {testimonials?.map((testimonial: TTestimonial) => (
             <Card
               key={testimonial._id}
@@ -133,6 +170,7 @@ const TestimonialsSection = () => {
         </div>
       </Marquee>
 
+      {/* action btn for user share experience  */}
       <Row justify={'center'}>
         <Button
           size={isMobile ? 'small' : 'middle'}

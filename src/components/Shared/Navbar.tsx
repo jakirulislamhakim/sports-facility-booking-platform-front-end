@@ -30,7 +30,7 @@ const Navbar = () => {
   // Define the menu items
   const menuItems = [
     { key: 'home', label: <NavLink to={'/'}>Home</NavLink> },
-    { key: 'dashboard', label: 'Dashboard' },
+    { key: 'dashboard', label: <NavLink to={'/dashboard'}>Dashboard</NavLink> },
     { key: 'about', label: <NavLink to={'/about-us'}>About Us</NavLink> },
     { key: 'contact', label: 'Contact Us' },
   ];
