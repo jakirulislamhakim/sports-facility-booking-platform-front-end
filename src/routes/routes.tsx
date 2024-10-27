@@ -8,6 +8,7 @@ import ErrorPage from '../pages/ErrorPage';
 import DashboardLayout from '../layout/DashboardLayout';
 import ProtectedRoute from '../layout/ProtectedRoute';
 import WelcomePage from '../pages/user/WelcomePage';
+import UserBookingsTable from '../pages/user/UserBookingsTable';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <WelcomePage />,
+      },
+      {
+        path: 'user-profile',
+        element: <WelcomePage />,
+      },
+      {
+        path: 'user/bookings',
+        element: <UserBookingsTable />,
       },
     ],
   },
