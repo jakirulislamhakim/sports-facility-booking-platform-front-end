@@ -1,11 +1,10 @@
-import React from 'react';
 import { Button, Typography } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 import '../../styles/home/heroSections.css'; // Importing custom styles for background image
 
 const { Title, Text } = Typography;
 
-const HeroSection: React.FC = () => {
+const HeroSection = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
   return (

@@ -9,6 +9,7 @@ import DashboardLayout from '../layout/DashboardLayout';
 import ProtectedRoute from '../layout/ProtectedRoute';
 import WelcomePage from '../pages/user/WelcomePage';
 import UserBookingsTable from '../pages/user/UserBookingsTable';
+import BookingDetails from '../pages/user/BookingDetails';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: 'user/bookings',
         element: <UserBookingsTable />,
+      },
+      {
+        path: 'user/bookings/:bookingId',
+        element: <BookingDetails />,
       },
     ],
   },

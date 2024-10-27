@@ -7,18 +7,18 @@ import { SubmitHandler } from 'react-hook-form';
 import FormSubmitBtn from '../Form/FormSubmitBtn';
 import { shareUserExperienceValidationSchema } from '../../validationSchema/ShareExperienceValidationSchema';
 
-type ShareExperienceModalProps = {
+type TShareExperienceModalProps = {
   visible: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit: SubmitHandler<any>;
   onCancel: () => void;
 };
 
-const ShareExperienceModal: React.FC<ShareExperienceModalProps> = ({
+const ShareExperienceModal = ({
   visible,
   onSubmit,
   onCancel,
-}) => {
+}: TShareExperienceModalProps) => {
   return (
     <Modal
       title="Share Your Experience"

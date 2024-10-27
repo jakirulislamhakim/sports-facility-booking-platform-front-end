@@ -1,5 +1,5 @@
-import React from 'react';
-import { Table, Button, Space, Tag, Typography, Grid } from 'antd';
+import { useState } from 'react';
+import { Table, Button, Space, Tag, Typography, Grid, Modal } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -10,11 +10,15 @@ import {
 import { BookingData, TApiErrorResponse } from '../../types';
 import { toast } from 'sonner';
 import { useMobileResponsive } from '../../hooks/useMobileResponsive';
+import SectionTitle from '../../components/UI/SectionTitle';
 
 const { Text } = Typography;
 const { useBreakpoint } = Grid;
 
-const UserBookingsTable: React.FC = () => {
+const UserBookingsTable = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedBookingId, setSelectedBookingId] = useState<string | null>(null);
+
   const navigate = useNavigate();
   const { data, isLoading } = useGetUserBookingsFacilitiesQuery(undefined);
   const [cancelUserBookingFacility] = useCancelUserBookingFacilityMutation();
@@ -24,6 +28,7 @@ const UserBookingsTable: React.FC = () => {
 
   const UserBookingsFacilities: BookingData[] = data?.data || [];
 
+  // write handle logic for cancel booking facility
   const handleCancelBooking = async (bookingId: string) => {
     try {
       const res = await cancelUserBookingFacility(bookingId).unwrap();
@@ -40,6 +45,27 @@ const UserBookingsTable: React.FC = () => {
       }
       toast.error('Something went wrong! Please try again.');
     }
+  };
+
+  // show modal
+  const showModal = (bookingId: string) => {
+    setSelectedBookingId(bookingId);
+    setIsModalOpen(true);
+  };
+
+  // modal action for cancel booking
+  const handleOk = () => {
+    if (selectedBookingId) {
+      handleCancelBooking(selectedBookingId);
+      setIsModalOpen(false);
+      setSelectedBookingId(null);
+    }
+  };
+
+  // modal close
+  const handleCancel = () => {
+    setSelectedBookingId(null);
+    setIsModalOpen(false);
   };
 
   const columns: ColumnsType<BookingData> = [
@@ -87,7 +113,7 @@ const UserBookingsTable: React.FC = () => {
           <Button
             size={isMobile ? 'small' : 'middle'}
             type="primary"
-            onClick={() => navigate(`/user/bookings/${record._id}`)}
+            onClick={() => navigate(`/dashboard/user/bookings/${record._id}`)}
           >
             Details
           </Button>
@@ -96,7 +122,7 @@ const UserBookingsTable: React.FC = () => {
               size={isMobile ? 'small' : 'middle'}
               type="primary"
               danger
-              onClick={() => handleCancelBooking(record._id)}
+              onClick={() => showModal(record._id)}
             >
               Cancel
             </Button>
@@ -107,15 +133,31 @@ const UserBookingsTable: React.FC = () => {
   ];
 
   return (
-    <Table<BookingData>
-      columns={columns}
-      dataSource={UserBookingsFacilities}
-      rowKey="_id"
-      loading={isLoading}
-      // pagination= {{}}
-      title={() => 'My Bookings'}
-      scroll={(screens.xs && { x: 600 }) || screens.sm ? { x: 800 } : undefined}
-    />
+    <>
+      <SectionTitle
+        title="Booking Management"
+        description="My Bookings: View or Manage Your Reservations"
+      />
+
+      <Table<BookingData>
+        columns={columns}
+        dataSource={UserBookingsFacilities}
+        rowKey="_id"
+        loading={isLoading}
+        pagination={false}
+        title={() => 'My Bookings'}
+        scroll={(screens.xs && { x: 600 }) || screens.sm ? { x: 800 } : undefined}
+      />
+      <Modal
+        title="Are you sure you want to cancel the facility ?"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        okText="YES"
+        cancelText="NO"
+        // confirmLoading={confirmLoading}
+      ></Modal>
+    </>
   );
 };
 

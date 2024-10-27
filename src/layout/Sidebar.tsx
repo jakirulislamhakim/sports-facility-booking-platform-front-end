@@ -39,7 +39,7 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
         mode="inline"
         defaultSelectedKeys={['user']}
         items={sidebarItems}
-        style={{  marginTop: '30px'}}
+        style={{ marginTop: '30px' }}
       />
     </Sider>
   );
