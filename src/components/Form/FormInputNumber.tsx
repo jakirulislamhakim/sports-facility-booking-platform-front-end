@@ -26,6 +26,7 @@ const FormInputNumber = ({
               validateStatus={error ? 'error' : ''}
             >
               <InputNumber
+                style={{ width: '50%' }}
                 id={name}
                 placeholder={placeHolder}
                 {...field}

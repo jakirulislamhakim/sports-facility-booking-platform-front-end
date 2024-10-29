@@ -13,3 +13,11 @@ export type TApiErrorResponse = {
     status: number;
   };
 };
+
+
+export type TApiArgQuery =
+  | {
+      name: string;
+      value: string;
+    }[]
+  | undefined;

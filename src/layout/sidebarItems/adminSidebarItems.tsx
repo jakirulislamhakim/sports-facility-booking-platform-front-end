@@ -23,9 +23,9 @@ export const adminSidebarItems: MenuProps['items'] = [
         label: <NavLink to="/dashboard/admin/add-facility">Add Facility</NavLink>,
       },
       {
-        key: 'updateFacility',
+        key: 'facility-table',
         label: (
-          <NavLink to="/dashboard/admin/update-facility">Update Facility</NavLink>
+          <NavLink to="/dashboard/admin/facility-table">Facility Table</NavLink>
         ),
       },
       {

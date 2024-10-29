@@ -11,6 +11,8 @@ import UserBookingsTable from '../pages/user/UserBookingsTable';
 import BookingDetails from '../pages/user/BookingDetails';
 import WelcomePage from '../pages/WelcomePage';
 import AddFacilityForm from '../pages/admin/AddFacilityForm';
+import FacilityTable from '../pages/admin/FacilityTable';
+import FacilityDetails from '../pages/admin/FacilityDetails';
 
 const router = createBrowserRouter([
   {
@@ -63,6 +65,14 @@ const router = createBrowserRouter([
       {
         path: 'admin/add-facility',
         element: <AddFacilityForm />,
+      },
+      {
+        path: 'admin/facility-table',
+        element: <FacilityTable />,
+      },
+      {
+        path: 'admin/facility-details/:facilityId',
+        element: <FacilityDetails />,
       },
     ],
   },

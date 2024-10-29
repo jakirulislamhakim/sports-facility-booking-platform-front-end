@@ -7,7 +7,7 @@ import {
   useCancelUserBookingFacilityMutation,
   useGetUserBookingsFacilitiesQuery,
 } from '../../redux/features/user/userBookingsApi';
-import { BookingData, TApiErrorResponse } from '../../types';
+import { TApiErrorResponse, TBookingData } from '../../types';
 import { toast } from 'sonner';
 import { useMobileResponsive } from '../../hooks/useMobileResponsive';
 import SectionTitle from '../../components/UI/SectionTitle';
@@ -26,9 +26,9 @@ const UserBookingsTable = () => {
   const screens = useBreakpoint();
   const isMobile = useMobileResponsive();
 
-  const UserBookingsFacilities: BookingData[] = data?.data || [];
+  const UserBookingsFacilities: TBookingData[] = data?.data || [];
 
-  // write handle logic for cancel booking facility
+  //  handle logic for cancel booking facility
   const handleCancelBooking = async (bookingId: string) => {
     try {
       const res = await cancelUserBookingFacility(bookingId).unwrap();
@@ -47,13 +47,13 @@ const UserBookingsTable = () => {
     }
   };
 
-  // show modal
+  // modal actions for show modal
   const showModal = (bookingId: string) => {
     setSelectedBookingId(bookingId);
     setIsModalOpen(true);
   };
 
-  // modal action for cancel booking
+  //  modal action for ultimate cancel booking
   const handleOk = () => {
     if (selectedBookingId) {
       handleCancelBooking(selectedBookingId);
@@ -62,13 +62,13 @@ const UserBookingsTable = () => {
     }
   };
 
-  // modal close
+  //  modal action for cancel booking modal close
   const handleCancel = () => {
     setSelectedBookingId(null);
     setIsModalOpen(false);
   };
 
-  const columns: ColumnsType<BookingData> = [
+  const columns: ColumnsType<TBookingData> = [
     {
       title: 'Facility Name',
       dataIndex: ['facility', 'name'],
@@ -139,13 +139,14 @@ const UserBookingsTable = () => {
         description="My Bookings: View or Manage Your Reservations"
       />
 
-      <Table<BookingData>
+      <Table<TBookingData>
         columns={columns}
         dataSource={UserBookingsFacilities}
         rowKey="_id"
         loading={isLoading}
         pagination={false}
         title={() => 'My Bookings'}
+        size={isMobile ? 'small' : 'middle'}
         scroll={(screens.xs && { x: 600 }) || screens.sm ? { x: 800 } : undefined}
       />
       <Modal

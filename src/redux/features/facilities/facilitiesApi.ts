@@ -1,16 +1,10 @@
+import { TApiArgQuery } from '../../../types';
 import { baseApi } from '../../api/baseApi';
-
-type TApiQuery =
-  | {
-      name: string;
-      value: string;
-    }[]
-  | undefined;
 
 const facilityApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllFacilities: builder.query({
-      query: (queryArgArr: TApiQuery) => {
+      query: (queryArgArr: TApiArgQuery) => {
         const params = new URLSearchParams();
 
         if (queryArgArr?.length) {
@@ -28,7 +22,6 @@ const facilityApi = baseApi.injectEndpoints({
       providesTags: ['facility'],
     }),
     addAFacility: builder.mutation({
-      // use type Omit for make new type without _id
       query: (body) => ({
         url: '/facility',
         method: 'POST',
@@ -36,7 +29,18 @@ const facilityApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['facility'],
     }),
+    removeAFacility: builder.mutation({
+      query: (facilityId: string) => ({
+        url: `/facility/${facilityId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['facility'],
+    }),
   }),
 });
 
-export const { useGetAllFacilitiesQuery, useAddAFacilityMutation } = facilityApi;
+export const {
+  useGetAllFacilitiesQuery,
+  useAddAFacilityMutation,
+  useRemoveAFacilityMutation,
+} = facilityApi;
