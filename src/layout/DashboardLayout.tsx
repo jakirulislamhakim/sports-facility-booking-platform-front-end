@@ -30,7 +30,7 @@ const DashboardLayout = () => {
           closable={false}
           onClose={() => setCollapsed(true)}
           open={!collapsed}
-          width={200}
+          width={280}
         >
           <Sidebar collapsed={false} />
         </Drawer>

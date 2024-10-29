@@ -25,8 +25,18 @@ const facilityApi = baseApi.injectEndpoints({
           params,
         };
       },
+      providesTags: ['facility'],
+    }),
+    addAFacility: builder.mutation({
+      // use type Omit for make new type without _id
+      query: (body) => ({
+        url: '/facility',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['facility'],
     }),
   }),
 });
 
-export const { useGetAllFacilitiesQuery } = facilityApi;
+export const { useGetAllFacilitiesQuery, useAddAFacilityMutation } = facilityApi;

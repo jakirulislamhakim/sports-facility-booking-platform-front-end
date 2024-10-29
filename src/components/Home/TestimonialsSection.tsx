@@ -5,10 +5,7 @@ import { useMobileResponsive } from '../../hooks/useMobileResponsive';
 import SectionTitle from '../UI/SectionTitle';
 import ResponsiveContainer from '../../utils/ResponsiveContainer';
 import { useState } from 'react';
-import {
-  useAddAllTestimonialsMutation,
-  useGetAllTestimonialsQuery,
-} from '../../redux/features/testomonials/testonialsApi';
+import { useAddATestimonialsMutation, useGetAllTestimonialsQuery } from '../../redux/features/testomonials/testonialsApi';
 import { TApiErrorResponse, TTestimonial } from '../../types';
 import ShareUserExperienceModal from './ShareUserExperienceModal';
 import { SubmitHandler } from 'react-hook-form';
@@ -24,7 +21,7 @@ const TestimonialsSection = () => {
   const navigate = useNavigate();
 
   const [imgErrors, setImgErrors] = useState<{ [key: string]: boolean }>({});
-  const [addTestimonial] = useAddAllTestimonialsMutation();
+  const [addTestimonial] = useAddATestimonialsMutation();
   const { data } = useGetAllTestimonialsQuery(undefined);
   const testimonials = data?.data;
 

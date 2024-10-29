@@ -8,6 +8,7 @@ import {
   Descriptions,
   Button,
   Tooltip,
+  Badge,
 } from 'antd';
 import {
   UserOutlined,
@@ -18,9 +19,9 @@ import {
   EditOutlined,
   CopyOutlined,
 } from '@ant-design/icons';
-import { useGetUserProfileQuery } from '../../redux/features/user/userApi';
-import { useMobileResponsive } from '../../hooks/useMobileResponsive';
-import Loading from '../../components/UI/Loading';
+import { useGetUserProfileQuery } from '../redux/features/user/userApi';
+import { useMobileResponsive } from '../hooks/useMobileResponsive';
+import Loading from '../components/UI/Loading';
 
 const { Title, Text } = Typography;
 
@@ -52,12 +53,14 @@ const WelcomePage = () => {
         >
           <Row justify="center" align="middle">
             <Col>
-              <Avatar
-                size={isMobile ? 50 : 74}
-                icon={<UserOutlined />}
-                src={user?.avatar}
-                style={{ border: '4px solid white' }}
-              />
+              <Badge.Ribbon text={user?.role === 'admin' && 'Admin'}>
+                <Avatar
+                  size={isMobile ? 50 : 74}
+                  icon={<UserOutlined />}
+                  src={user?.avatar}
+                  style={{ border: '4px solid white' }}
+                />{' '}
+              </Badge.Ribbon>
             </Col>
             <Col style={{ marginLeft: isMobile ? 8 : 16 }}>
               <Title level={isMobile ? 4 : 2} style={{ margin: 0 }}>

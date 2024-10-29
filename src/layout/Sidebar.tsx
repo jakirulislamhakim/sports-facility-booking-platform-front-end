@@ -1,26 +1,8 @@
-import { UserOutlined, VideoCameraOutlined, HomeFilled } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
-import { NavLink } from 'react-router-dom';
+// import { userSidebarItems } from './sidebarItems/userSidebarItems';
+import { adminSidebarItems } from './sidebarItems/adminSidebarItems';
 
 const { Sider } = Layout;
-
-const sidebarItems = [
-  {
-    key: 'home',
-    icon: <HomeFilled />,
-    label: <NavLink to="/">Home</NavLink>,
-  },
-  {
-    key: 'user',
-    icon: <UserOutlined />,
-    label: <NavLink to="/dashboard/user-profile">User</NavLink>,
-  },
-  {
-    key: 'booking',
-    icon: <VideoCameraOutlined />,
-    label: <NavLink to="/dashboard/user/Bookings">Bookings</NavLink>,
-  },
-];
 
 const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
   return (
@@ -28,7 +10,7 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
       trigger={null}
       collapsible
       collapsed={collapsed}
-      width={200}
+      width={250}
       style={{
         background: 'white',
         borderRight: '1px solid #f0f0f0',
@@ -38,7 +20,8 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
         theme="light"
         mode="inline"
         defaultSelectedKeys={['user']}
-        items={sidebarItems}
+        // set dynamic sidebar items for user and admin
+        items={adminSidebarItems}
         style={{ marginTop: '30px' }}
       />
     </Sider>

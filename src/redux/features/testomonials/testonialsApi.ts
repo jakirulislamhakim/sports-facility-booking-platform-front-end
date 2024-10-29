@@ -9,7 +9,7 @@ const authApi = baseApi.injectEndpoints({
         method: 'GET',
       }),
     }),
-    addAllTestimonials: builder.mutation({
+    addATestimonials: builder.mutation({
       query: (body: Pick<TTestimonial, 'rating' | 'feedback'>) => ({
         url: '/user-feedback',
         method: 'POST',
@@ -19,4 +19,4 @@ const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllTestimonialsQuery, useAddAllTestimonialsMutation } = authApi;
+export const { useGetAllTestimonialsQuery, useAddATestimonialsMutation } = authApi;

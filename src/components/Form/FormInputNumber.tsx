@@ -1,16 +1,19 @@
-import { Form, Input } from 'antd';
+import { Form, InputNumber } from 'antd';
 import { Controller } from 'react-hook-form';
-
-const { TextArea } = Input;
 
 type TFormInputProps = {
   name: string;
   label: string;
   placeHolder?: string;
-  rows?: number;
+  maxNumber?: number;
 };
 
-const FormTextArea = ({ name, label, placeHolder, rows }: TFormInputProps) => {
+const FormInputNumber = ({
+  name,
+  label,
+  placeHolder,
+  maxNumber,
+}: TFormInputProps) => {
   return (
     <>
       <Controller
@@ -22,7 +25,13 @@ const FormTextArea = ({ name, label, placeHolder, rows }: TFormInputProps) => {
               help={error ? error.message : null}
               validateStatus={error ? 'error' : ''}
             >
-              <TextArea {...field} placeholder={placeHolder} rows={rows} />
+              <InputNumber
+                id={name}
+                placeholder={placeHolder}
+                {...field}
+                min={0}
+                max={maxNumber}
+              />
             </Form.Item>
           );
         }}
@@ -31,4 +40,4 @@ const FormTextArea = ({ name, label, placeHolder, rows }: TFormInputProps) => {
   );
 };
 
-export default FormTextArea;
+export default FormInputNumber;
