@@ -11,6 +11,7 @@ type TRootFormProps = {
 
 type TFormConfig = {
   resolver?: any;
+  defaultValues?: Record<string, unknown>;
 };
 
 const RootForm = ({
@@ -18,10 +19,16 @@ const RootForm = ({
   children,
   disabled = false,
   resolver,
+  defaultValues,
 }: TRootFormProps) => {
   const formConfig: TFormConfig = {};
+  // set resolver if there is
   if (resolver) {
     formConfig['resolver'] = resolver;
+  }
+  // set defaultValues if there is
+  if (defaultValues) {
+    formConfig['defaultValues'] = defaultValues;
   }
 
   const methods = useForm(formConfig);

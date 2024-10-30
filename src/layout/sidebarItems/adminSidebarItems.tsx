@@ -28,12 +28,6 @@ export const adminSidebarItems: MenuProps['items'] = [
           <NavLink to="/dashboard/admin/facility-table">Facility Table</NavLink>
         ),
       },
-      {
-        key: 'removeFacility',
-        label: (
-          <NavLink to="/dashboard/admin/remove-facility">Remove Facility</NavLink>
-        ),
-      },
     ],
   },
 ];

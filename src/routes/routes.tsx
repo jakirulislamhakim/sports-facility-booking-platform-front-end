@@ -13,6 +13,7 @@ import WelcomePage from '../pages/WelcomePage';
 import AddFacilityForm from '../pages/admin/AddFacilityForm';
 import FacilityTable from '../pages/admin/FacilityTable';
 import FacilityDetails from '../pages/admin/FacilityDetails';
+import FacilityUpdate from '../pages/admin/FacilityUpdate';
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: 'admin/facility-details/:facilityId',
         element: <FacilityDetails />,
+      },
+      {
+        path: 'admin/facility-update/:facilityId',
+        element: <FacilityUpdate />,
       },
     ],
   },

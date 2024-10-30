@@ -114,23 +114,29 @@ const FacilityTable = () => {
       align: 'center',
       render: (_, record) => (
         <Space size={isMobile ? 'small' : 'middle'} wrap>
+          {/* facility details btn */}
           <Tooltip title="Details" color="blue">
             <Link to={`/dashboard/admin/facility-details/${record._id}`}>
               <Button
                 type="primary"
                 icon={<EyeOutlined />}
                 size={isMobile ? 'small' : 'middle'}
-              />{' '}
+              />
             </Link>
           </Tooltip>
+
+          {/* facility update btn */}
           <Tooltip title="Update" mouseLeaveDelay={0.2}>
-            <Button
-              type="default"
-              icon={<EditOutlined />}
-              // onClick={() => handleUpdate(record._id)}
-              size={isMobile ? 'small' : 'middle'}
-            />
+            <Link to={`/dashboard/admin/facility-update/${record._id}`}>
+              <Button
+                type="default"
+                icon={<EditOutlined />}
+                size={isMobile ? 'small' : 'middle'}
+              />
+            </Link>
           </Tooltip>
+
+          {/* facility delete btn */}
           <Tooltip title="Delete" color="red">
             <Button
               type="primary"

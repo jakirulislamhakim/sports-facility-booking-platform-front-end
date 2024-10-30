@@ -5,7 +5,7 @@ import FormInputNumber from '../../components/Form/FormInputNumber';
 import FromInputImage from '../../components/Form/FormInputImage';
 import FormSubmitBtn from '../../components/Form/FormSubmitBtn';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { addFacilityFormValidationSchema } from '../../validationSchema/addFacilityFormValidationSchema';
+import { addFacilityFormValidationSchema } from '../../validationSchema/FacilityFormValidationSchema';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
 import { useAddAFacilityMutation } from '../../redux/features/facilities/facilitiesApi';
 import { toast } from 'sonner';
@@ -13,6 +13,7 @@ import { TApiErrorResponse } from '../../types';
 import { useState } from 'react';
 import Title from 'antd/es/typography/Title';
 import { Divider } from 'antd';
+import FormRating from '../../components/Form/FormRating';
 
 const AddFacilityForm = () => {
   const [addAFacility, { isLoading }] = useAddAFacilityMutation();
@@ -88,6 +89,9 @@ const AddFacilityForm = () => {
           name="location"
           placeHolder="e.g., 456 Sports Ave, Springfield"
         />
+
+        {/* rating */}
+        <FormRating />
 
         {/* Image Upload */}
         <FromInputImage label="Facility Image" name="image" />

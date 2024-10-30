@@ -13,7 +13,7 @@ const FormRating = () => {
               help={error ? error.message : null}
               validateStatus={error ? 'error' : ''}
             >
-              <Rate {...field} />
+              <Rate allowHalf = {true} {...field} />
             </Form.Item>
           );
         }}
