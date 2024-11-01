@@ -48,12 +48,14 @@ const FacilityDetails = () => {
                         {facility?.name}
                       </Title>
                       <Space size="large">
-                        <Rate
-                          disabled
-                          defaultValue={facility?.rating ?? 0}
-                          allowHalf
-                          style={{ fontSize: isMobile ? '14px' : '18px' }}
-                        />
+                        {facility?.rating && (
+                          <Rate
+                            disabled
+                            defaultValue={facility?.rating}
+                            allowHalf
+                            style={{ fontSize: isMobile ? '14px' : '18px' }}
+                          />
+                        )}
                         <span
                           style={{
                             fontSize: isMobile ? '12px' : '16px',

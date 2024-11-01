@@ -14,6 +14,8 @@ import AddFacilityForm from '../pages/admin/AddFacilityForm';
 import FacilityTable from '../pages/admin/FacilityTable';
 import FacilityDetails from '../pages/admin/FacilityDetails';
 import FacilityUpdate from '../pages/admin/FacilityUpdate';
+import BookingsTable from '../pages/admin/BookingTable';
+import CreateAdmin from '../pages/admin/CreateAdmin';
 
 const router = createBrowserRouter([
   {
@@ -78,6 +80,14 @@ const router = createBrowserRouter([
       {
         path: 'admin/facility-update/:facilityId',
         element: <FacilityUpdate />,
+      },
+      {
+        path: 'admin/bookings-table',
+        element: <BookingsTable />,
+      },
+      {
+        path: 'admin/create-admin',
+        element: <CreateAdmin />,
       },
     ],
   },

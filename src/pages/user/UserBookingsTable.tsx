@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Table, Button, Space, Tag, Typography, Grid, Modal } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import {
   useCancelUserBookingFacilityMutation,
@@ -19,7 +19,6 @@ const UserBookingsTable = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedBookingId, setSelectedBookingId] = useState<string | null>(null);
 
-  const navigate = useNavigate();
   const { data, isLoading } = useGetUserBookingsFacilitiesQuery(undefined);
   const [cancelUserBookingFacility] = useCancelUserBookingFacilityMutation();
 
@@ -40,10 +39,8 @@ const UserBookingsTable = () => {
       const err = error as TApiErrorResponse;
       if (error instanceof Error) {
         toast.error(error.message);
-      } else if (err) {
-        toast.error(err.data.message);
       }
-      toast.error('Something went wrong! Please try again.');
+      toast.error(err.data.message || 'Something went wrong! Please try again.');
     }
   };
 
@@ -110,13 +107,12 @@ const UserBookingsTable = () => {
       key: 'actions',
       render: (_, record) => (
         <Space size="small" direction={isMobile ? 'vertical' : 'horizontal'}>
-          <Button
-            size={isMobile ? 'small' : 'middle'}
-            type="primary"
-            onClick={() => navigate(`/dashboard/user/bookings/${record._id}`)}
-          >
-            Details
-          </Button>
+          <Link to={`/dashboard/user/bookings/${record._id}`}>
+            <Button size={isMobile ? 'small' : 'middle'} type="primary">
+              Details
+            </Button>
+          </Link>
+
           {record.isBooked !== 'cancelled' && (
             <Button
               size={isMobile ? 'small' : 'middle'}
@@ -150,13 +146,12 @@ const UserBookingsTable = () => {
         scroll={(screens.xs && { x: 600 }) || screens.sm ? { x: 800 } : undefined}
       />
       <Modal
-        title="Are you sure you want to cancel the facility ?"
+        title="Are you sure you want to cancel the booking facility ?"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
         okText="YES"
         cancelText="NO"
-        // confirmLoading={confirmLoading}
       ></Modal>
     </>
   );

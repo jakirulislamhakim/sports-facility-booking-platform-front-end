@@ -38,6 +38,6 @@ export const registrationValidationSchema = z.object({
     .string({
       required_error: 'Address is required',
     })
-    .min(1, { message: 'Address must have at least 1 character' })
-    .max(255, { message: "Address can't exceed 255 characters" }),
+    .min(3, { message: 'Address must have at least 1 character' })
+    .max(60, { message: "Address can't exceed 60 characters" }),
 });

@@ -13,8 +13,12 @@ const DashboardLayout = () => {
   const isMobile = useMobileResponsive();
 
   useEffect(() => {
-    // Collapse sidebar by default on mobile
-    if (isMobile) setCollapsed(true);
+    // Collapse sidebar by default close mobile
+    if (isMobile) {
+      setCollapsed(true);
+    } else {
+      setCollapsed(false);
+    }
   }, [isMobile]);
 
   const toggleSidebar = () => {

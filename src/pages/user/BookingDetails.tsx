@@ -10,16 +10,16 @@ import {
 } from 'antd';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
-import { useGetUserSingleBookingFacilitiesQuery } from '../../redux/features/user/userBookingsApi';
 import Loading from '../../components/UI/Loading';
 import { toast } from 'sonner';
+import { useGetUserSingleBookingFacilityQuery } from '../../redux/features/user/userBookingsApi';
 
 const { Title, Text } = Typography;
 const { useBreakpoint } = Grid;
 
 const BookingDetails = () => {
   const { bookingId } = useParams<{ bookingId: string }>(); // Booking ID from URL params
-  const { data, isLoading, error } = useGetUserSingleBookingFacilitiesQuery(
+  const { data, isLoading, error } = useGetUserSingleBookingFacilityQuery(
     bookingId as string
   );
 

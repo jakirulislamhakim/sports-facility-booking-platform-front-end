@@ -9,7 +9,7 @@ const userBookingsApi = baseApi.injectEndpoints({
       }),
       providesTags: ['bookings'],
     }),
-    getUserSingleBookingFacilities: builder.query({
+    getUserSingleBookingFacility: builder.query({
       query: (bookingId: string) => ({
         url: `/bookings/user/${bookingId}`,
         method: 'GET',
@@ -23,11 +23,20 @@ const userBookingsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['bookings'],
     }),
+    //! this is for admin get all booking
+    getAdminBookingsAllFacilities: builder.query({
+      query: () => ({
+        url: '/bookings',
+        method: 'GET',
+      }),
+      providesTags: ['bookings'],
+    }),
   }),
 });
 
 export const {
   useGetUserBookingsFacilitiesQuery,
-  useGetUserSingleBookingFacilitiesQuery,
+  useGetUserSingleBookingFacilityQuery,
   useCancelUserBookingFacilityMutation,
+  useGetAdminBookingsAllFacilitiesQuery,
 } = userBookingsApi;
