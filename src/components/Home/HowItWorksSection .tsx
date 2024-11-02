@@ -6,7 +6,7 @@ import {
 import 'react-vertical-timeline-component/style.min.css';
 import ResponsiveContainer from '../../utils/ResponsiveContainer';
 import SectionTitle from '../UI/SectionTitle';
-import { timelineData } from '../../data/timeLineData';
+import { howItWorksTimelineData } from '../../data/howItWorksTimeLineData';
 
 const { Title } = Typography;
 
@@ -20,7 +20,7 @@ const HowItWorksSection = () => {
 
       <VerticalTimeline animate={true} lineColor="#e6e6e6">
         {/* time line data import from data folder */}
-        {timelineData.map((item, index) => (
+        {howItWorksTimelineData.map((item, index) => (
           <VerticalTimelineElement
             key={index}
             className="vertical-timeline-element"
