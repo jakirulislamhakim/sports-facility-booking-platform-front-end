@@ -5,6 +5,7 @@ import OurMissionSection from '../components/AboutUs/OurMissionSection';
 import MeetOurTeamSection from '../components/AboutUs/MeetOurTeamSection';
 import OurJourneyTimeLineSection from '../components/AboutUs/OurJourneyTimeLineSection';
 import ContactSection from '../components/AboutUs/ContactSection';
+import FAQSection from '../components/Home/FAQSection';
 
 const AboutUs = () => {
   return (
@@ -27,6 +28,8 @@ const AboutUs = () => {
         {/* Our Journey Timeline */}
         <OurJourneyTimeLineSection />
         <Divider />
+
+        <FAQSection />
 
         <ContactSection />
       </ResponsiveContainer>

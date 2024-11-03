@@ -32,7 +32,7 @@ const Navbar = () => {
     { key: 'home', label: <NavLink to={'/'}>Home</NavLink> },
     { key: 'dashboard', label: <NavLink to={'/dashboard'}>Dashboard</NavLink> },
     { key: 'about', label: <NavLink to={'/about-us'}>About Us</NavLink> },
-    { key: 'contact', label: 'Contact Us' },
+    { key: 'contact', label: <NavLink to={'/contact-us'}>Contact Us</NavLink> },
   ];
 
   const handleLogoutUser = () => {

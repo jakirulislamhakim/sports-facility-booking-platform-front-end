@@ -7,7 +7,7 @@ const { Text, Title, Paragraph } = Typography;
 // Team members data
 const teamMembers = [
   {
-    name: 'Sarah Johnson',
+    name: 'Jahidul Islam',
     role: 'Founder & CEO',
     bio: 'Former professional athlete with 15 years of experience in sports facility management',
     image: 'https://i.ibb.co.com/8rSFwWS/IMG-20220217-230939.jpg',
@@ -27,7 +27,7 @@ const teamMembers = [
     },
   },
   {
-    name: 'Emma Rodriguez',
+    name: 'Jakirul Islam Hakim',
     role: 'Community Manager',
     bio: 'Passionate about creating inclusive sports communities',
     image:

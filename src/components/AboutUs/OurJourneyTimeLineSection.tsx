@@ -49,18 +49,20 @@ const OurJourneyTimeLineSection = () => {
         >
           Our Journey
         </Title>
-        <Timeline mode={isMobile ? 'left' : 'alternate'}>
-          {timelineItems.map((item, index) => (
-            <Timeline.Item key={index} dot={item.icon}>
+        <Timeline
+          mode={isMobile ? 'left' : 'alternate'}
+          items={timelineItems.map((item) => ({
+            dot: item.icon,
+            children: (
               <Card bordered={false}>
                 <Title level={isMobile ? 5 : 4}>
                   {item.year} - {item.title}
                 </Title>
                 <Paragraph>{item.description}</Paragraph>
               </Card>
-            </Timeline.Item>
-          ))}
-        </Timeline>
+            ),
+          }))}
+        />
       </Col>
     </Row>
   );

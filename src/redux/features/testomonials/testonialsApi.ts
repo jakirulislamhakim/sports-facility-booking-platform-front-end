@@ -16,7 +16,18 @@ const authApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+    sendUserMessage: builder.mutation({
+      query: (body) => ({
+        url: '/user-feedback/send-message',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllTestimonialsQuery, useAddATestimonialsMutation } = authApi;
+export const {
+  useGetAllTestimonialsQuery,
+  useAddATestimonialsMutation,
+  useSendUserMessageMutation,
+} = authApi;

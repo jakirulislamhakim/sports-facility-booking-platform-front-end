@@ -41,7 +41,7 @@ const ErrorPage = () => {
                 Need help finding what you're looking for?
               </Text>
               <Space split={<Text type="secondary">|</Text>}>
-                <Button type="link" onClick={() => navigate('/contact')}>
+                <Button type="link" onClick={() => navigate('/contact-us')}>
                   Contact Us
                 </Button>
               </Space>

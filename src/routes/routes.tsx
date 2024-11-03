@@ -16,6 +16,7 @@ import FacilityDetails from '../pages/admin/FacilityDetails';
 import FacilityUpdate from '../pages/admin/FacilityUpdate';
 import BookingsTable from '../pages/admin/BookingTable';
 import CreateAdmin from '../pages/admin/CreateAdmin';
+import ContactUs from '../pages/ContactUs';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: 'about-us',
         element: <AboutUs />,
+      },
+      {
+        path: 'contact-us',
+        element: <ContactUs />,
       },
     ],
   },
