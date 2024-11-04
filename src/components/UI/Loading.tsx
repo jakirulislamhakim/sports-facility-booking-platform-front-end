@@ -6,11 +6,11 @@ type TLoadingProps = {
   isLoading: boolean;
   tip?: string;
   children: React.ReactNode;
-}
+};
 
-const Loading = ({ isLoading, tip = 'Loading...', children } : TLoadingProps) => {
+const Loading = ({ isLoading, tip = 'Loading...', children }: TLoadingProps) => {
   return (
-    <Spin spinning={isLoading} tip={tip} size='large'>
+    <Spin spinning={isLoading} tip={tip} size="large">
       {children}
     </Spin>
   );

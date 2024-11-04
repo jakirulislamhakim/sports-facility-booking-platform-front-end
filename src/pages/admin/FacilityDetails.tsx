@@ -35,7 +35,7 @@ const FacilityDetails = () => {
 
   return (
     <Loading isLoading={isLoading}>
-      <div style={{ overflow: 'hidden', maxWidth: '1220px', margin: '0 auto' }}>
+      <div style={{ overflow: 'hidden', maxWidth: '1220px', margin: '20px auto' }}>
         {/* Header Section */}
         <Row gutter={[24, 24]} style={{ overflow: 'hidden' }}>
           <Col xs={24}>
@@ -101,7 +101,7 @@ const FacilityDetails = () => {
                   alt={facility?.name}
                   style={{
                     width: '100%',
-                    height: '400px',
+                    height: isMobile ? '200px' : '400px',
                     objectFit: 'cover',
                     borderRadius: '8px',
                   }}

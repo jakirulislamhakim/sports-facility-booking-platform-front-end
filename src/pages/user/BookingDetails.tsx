@@ -7,6 +7,7 @@ import {
   Divider,
   Image,
   Grid,
+  Alert,
 } from 'antd';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -36,7 +37,8 @@ const BookingDetails = () => {
   return (
     <Loading isLoading={isLoading}>
       <Card>
-        {booking && facility ? (
+        {/* show bookings details */}
+        {booking && facility && (
           <Row gutter={[24, 16]}>
             <Col span={24}>
               <Title level={screens.xs ? 4 : 3} style={{ textAlign: 'center' }}>
@@ -60,6 +62,7 @@ const BookingDetails = () => {
                 bordered
                 column={1}
                 labelStyle={{ width: screens.xs ? '20%' : '30%' }}
+                size={screens.xs ? 'small' : 'middle'}
               >
                 <Descriptions.Item label="Facility Name">
                   {facility?.name}
@@ -101,8 +104,17 @@ const BookingDetails = () => {
               </Descriptions>
             </Col>
           </Row>
-        ) : (
-          <Text style={{ color: 'red' }}>No booking details available.</Text>
+        )}
+
+        {/* if can't find the facility or the facility is not exists */}
+        {!isLoading && !booking && (
+          <Alert
+            message="Error"
+            description="Sorry, we couldn't load the facility. Please try again later."
+            type="error"
+            showIcon
+            style={{ marginBottom: '20px' }}
+          />
         )}
       </Card>
     </Loading>

@@ -12,6 +12,8 @@ import ContactUs from '../pages/ContactUs';
 import UnauthorizedPage from '../pages/UnauthorizedPage';
 import userRoutes from './userRoutes';
 import adminRoutes from './adminRoutes';
+import Facilities from '../pages/Facilities';
+import FacilityDetails from '../pages/admin/FacilityDetails';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
       {
         path: 'contact-us',
         element: <ContactUs />,
+      },
+      {
+        path: '/facilities',
+        element: <Facilities />,
+      },
+      {
+        path: '/facilities/:facilityId',
+        element: <FacilityDetails />,
       },
     ],
   },

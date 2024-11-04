@@ -3,7 +3,7 @@ type TErrorSource = {
   message: string;
 };
 
-// This error response type represents the structure of the 
+// This error response type represents the structure of the
 // error object returned by the backend when an API call fails.
 export type TApiErrorResponse = {
   data: {
@@ -13,7 +13,6 @@ export type TApiErrorResponse = {
     status: number;
   };
 };
-
 
 export type TApiArgQuery =
   | {

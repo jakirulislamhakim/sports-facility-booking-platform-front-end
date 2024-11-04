@@ -30,6 +30,7 @@ const Navbar = () => {
   // Define the menu items
   const menuItems = [
     { key: 'home', label: <NavLink to={'/'}>Home</NavLink> },
+    { key: 'facilities', label: <NavLink to={'/facilities'}>Facilities</NavLink> },
     { key: 'dashboard', label: <NavLink to={'/dashboard'}>Dashboard</NavLink> },
     { key: 'about', label: <NavLink to={'/about-us'}>About Us</NavLink> },
     { key: 'contact', label: <NavLink to={'/contact-us'}>Contact Us</NavLink> },
@@ -53,7 +54,13 @@ const Navbar = () => {
         <div className="navbar-menu">
           {/* Desktop Menu */}
           {!isMobile && (
-            <Menu mode="horizontal" className="desktop-menu" items={menuItems} />
+            <Menu
+              mode="horizontal"
+              defaultSelectedKeys={['home']}
+              className="desktop-menu"
+              items={menuItems}
+              style={{ width: '500px' }}
+            />
           )}
 
           {/* Mobile Drawer */}
