@@ -1,6 +1,6 @@
 export type TAuthUser = {
   email: string;
-  role: string;
+  role: 'admin' | 'user';
   iat: number;
   exp: number;
 };

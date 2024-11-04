@@ -7,16 +7,11 @@ import Home from '../pages/Home';
 import ErrorPage from '../pages/ErrorPage';
 import DashboardLayout from '../layout/DashboardLayout';
 import ProtectedRoute from '../layout/ProtectedRoute';
-import UserBookingsTable from '../pages/user/UserBookingsTable';
-import BookingDetails from '../pages/user/BookingDetails';
 import WelcomePage from '../pages/WelcomePage';
-import AddFacilityForm from '../pages/admin/AddFacilityForm';
-import FacilityTable from '../pages/admin/FacilityTable';
-import FacilityDetails from '../pages/admin/FacilityDetails';
-import FacilityUpdate from '../pages/admin/FacilityUpdate';
-import BookingsTable from '../pages/admin/BookingTable';
-import CreateAdmin from '../pages/admin/CreateAdmin';
 import ContactUs from '../pages/ContactUs';
+import UnauthorizedPage from '../pages/UnauthorizedPage';
+import userRoutes from './userRoutes';
+import adminRoutes from './adminRoutes';
 
 const router = createBrowserRouter([
   {
@@ -41,7 +36,7 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute allowedRoles={['admin', 'user']}>
         <DashboardLayout />
       </ProtectedRoute>
     ),
@@ -52,48 +47,9 @@ const router = createBrowserRouter([
       },
 
       // user routes here
-      {
-        path: 'user-profile',
-        element: <WelcomePage />,
-      },
-      {
-        path: 'user/bookings',
-        element: <UserBookingsTable />,
-      },
-      {
-        path: 'user/bookings/:bookingId',
-        element: <BookingDetails />,
-      },
-
+      ...userRoutes,
       // admin routs here
-      {
-        path: 'admin-profile',
-        element: <WelcomePage />,
-      },
-      {
-        path: 'admin/add-facility',
-        element: <AddFacilityForm />,
-      },
-      {
-        path: 'admin/facility-table',
-        element: <FacilityTable />,
-      },
-      {
-        path: 'admin/facility-details/:facilityId',
-        element: <FacilityDetails />,
-      },
-      {
-        path: 'admin/facility-update/:facilityId',
-        element: <FacilityUpdate />,
-      },
-      {
-        path: 'admin/bookings-table',
-        element: <BookingsTable />,
-      },
-      {
-        path: 'admin/create-admin',
-        element: <CreateAdmin />,
-      },
+      ...adminRoutes,
     ],
   },
   {
@@ -103,6 +59,10 @@ const router = createBrowserRouter([
   {
     path: '/registration',
     element: <Registration />,
+  },
+  {
+    path: '/unauthorized',
+    element: <UnauthorizedPage />,
   },
 ]);
 

@@ -11,7 +11,7 @@ export const userSidebarItems: MenuProps['items'] = [
   {
     key: 'user',
     icon: <UserOutlined />,
-    label: <NavLink to="/dashboard/user-profile">User Profile</NavLink>,
+    label: <NavLink to="/dashboard/user/profile">User Profile</NavLink>,
   },
   {
     key: 'booking',
