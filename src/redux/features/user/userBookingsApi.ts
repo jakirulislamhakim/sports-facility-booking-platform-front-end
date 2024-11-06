@@ -23,6 +23,13 @@ const userBookingsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['bookings'],
     }),
+    availableTimeSlot: builder.query({
+      query: (arg: { date: string; facility: string }) => ({
+        url: `/check-availability?date=${arg.date}&facility=${arg.facility} `,
+        method: 'GET',
+      }),
+    }),
+
     //! this is for admin get all booking
     getAdminBookingsAllFacilities: builder.query({
       query: () => ({
@@ -38,5 +45,6 @@ export const {
   useGetUserBookingsFacilitiesQuery,
   useGetUserSingleBookingFacilityQuery,
   useCancelUserBookingFacilityMutation,
+  useAvailableTimeSlotQuery,
   useGetAdminBookingsAllFacilitiesQuery,
 } = userBookingsApi;

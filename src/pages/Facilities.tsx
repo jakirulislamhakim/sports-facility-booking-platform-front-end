@@ -71,33 +71,33 @@ const Facilities = () => {
           <Divider />
 
           {/* Search and Filter Section */}
-          <div className="mb-6">
-            <Row
-              gutter={[16, 16]}
-              justify={'space-between'}
-              style={{ margin: '20px 5px' }}
-            >
-              <Col xs={24} sm={12} md={8} lg={6}>
-                <Search
-                  placeholder="Search facilities..."
-                  style={{ width: '100%' }}
-                  allowClear
-                  onSearch={onSearch}
-                  disabled={isError}
-                  // onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </Col>
-              <Col xs={24} sm={12} md={8} lg={6}>
-                <Select
-                  defaultValue="Filter by.."
-                  style={{ width: '100%' }}
-                  options={selectOptions}
-                  onChange={setSelectedOptions}
-                  disabled={isError}
-                />
-              </Col>
-            </Row>
-          </div>
+          <Row
+            gutter={[16, 16]}
+            justify={'space-between'}
+            style={{ margin: useBreakpoint().xs ? '20px 5px' : '40px 5px' }}
+          >
+            <Col xs={24} sm={12} md={8} lg={6}>
+              <Search
+                placeholder="Search facilities..."
+                size={useBreakpoint().xs ? 'small' : 'middle'}
+                style={{ width: '100%' }}
+                allowClear
+                onSearch={onSearch}
+                disabled={isError}
+                // onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </Col>
+            <Col xs={24} sm={12} md={8} lg={6}>
+              <Select
+                defaultValue="Filter by.."
+                size={useBreakpoint().xs ? 'small' : 'middle'}
+                style={{ width: '100%' }}
+                options={selectOptions}
+                onChange={setSelectedOptions}
+                disabled={isError}
+              />
+            </Col>
+          </Row>
 
           {/* Error Handling when data couldn't fetch */}
           {isError && (

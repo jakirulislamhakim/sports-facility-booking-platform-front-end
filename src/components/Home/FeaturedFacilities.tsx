@@ -7,6 +7,7 @@ import SectionTitle from '../UI/SectionTitle';
 import { useGetAllFacilitiesQuery } from '../../redux/features/facilities/facilitiesApi';
 import '../../styles/home/featuredFacilities.css';
 import { TFacility } from '../../types';
+import { Link } from 'react-router-dom';
 
 const FeaturedFacilities = () => {
   const isMobile = useMobileResponsive();
@@ -66,13 +67,15 @@ const FeaturedFacilities = () => {
           padding: isMobile ? '0 16px' : 0,
         }}
       >
-        <Button
-          type="primary"
-          size={isMobile ? 'middle' : 'large'}
-          style={{ width: isMobile ? '100%' : 'auto' }}
-        >
-          View All Facilities <ArrowRightOutlined />
-        </Button>
+        <Link to={'/facilities'}>
+          <Button
+            type="primary"
+            size={isMobile ? 'middle' : 'large'}
+            style={{ width: isMobile ? '100%' : 'auto' }}
+          >
+            View All Facilities <ArrowRightOutlined />
+          </Button>
+        </Link>
       </div>
     </ResponsiveContainer>
   );

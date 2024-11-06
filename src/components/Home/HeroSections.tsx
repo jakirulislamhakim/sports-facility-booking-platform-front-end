@@ -1,6 +1,7 @@
 import { Button, Typography } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 import '../../styles/home/heroSections.css'; // Importing custom styles for background image
+import { Link } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 
@@ -18,9 +19,11 @@ const HeroSection = () => {
           Find and book top-rated sports facilities without the hassle.
         </Text>
         <div style={{ marginTop: '20px' }}>
-          <Button type="primary" size={isMobile ? 'small' : 'large'}>
-            Discover Facilities
-          </Button>
+          <Link to={'/facilities'}>
+            <Button type="primary" size={isMobile ? 'small' : 'large'}>
+              Discover Facilities
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

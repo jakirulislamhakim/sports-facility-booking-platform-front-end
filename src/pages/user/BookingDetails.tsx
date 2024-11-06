@@ -37,7 +37,7 @@ const BookingDetails = () => {
   return (
     <Loading isLoading={isLoading}>
       <Card>
-        {/* show bookings details */}
+        {/* show bookings details card*/}
         {booking && facility && (
           <Row gutter={[24, 16]}>
             <Col span={24}>

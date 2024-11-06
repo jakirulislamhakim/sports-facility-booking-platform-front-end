@@ -4,8 +4,7 @@ export type TBookingData = {
   _id: string;
   user: string;
   facility: TFacility;
-  startTime: string;
-  endTime: string;
+  timeSlot: string;
   date: string;
   payableAmount: number;
   isBooked: string;

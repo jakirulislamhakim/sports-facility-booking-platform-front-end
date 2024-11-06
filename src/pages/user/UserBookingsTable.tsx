@@ -84,8 +84,8 @@ const UserBookingsTable = () => {
     },
     {
       title: 'Time',
+      dataIndex: 'timeSlot',
       key: 'time',
-      render: (_, record) => `${record.startTime} - ${record.endTime}`,
     },
     {
       title: 'Amount',
@@ -105,6 +105,7 @@ const UserBookingsTable = () => {
     {
       title: 'Actions',
       key: 'actions',
+      align:'center',
       render: (_, record) => (
         <Space size="small" direction={isMobile ? 'vertical' : 'horizontal'}>
           <Link to={`/dashboard/user/bookings/${record._id}`}>

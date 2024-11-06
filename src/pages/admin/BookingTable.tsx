@@ -45,9 +45,10 @@ const BookingsTable = () => {
       render: (text: string) => dayjs(text).format('DD-MMMM-YYYY'),
     },
     {
-      title: 'Time',
-      key: 'time',
-      render: (_, record) => `${record.startTime} - ${record.endTime}`,
+      title: 'Time Slot',
+      dataIndex: 'timeSlot',
+      key: 'timeSlot',
+      // render: (_, record) => `${record.startTime} - ${record.endTime}`,
     },
     {
       title: 'Amount',
@@ -64,7 +65,7 @@ const BookingsTable = () => {
         return <Tag color={color}>{status.toUpperCase()}</Tag>;
       },
     },
-    // TODO: if need show details 
+    // TODO: if need show details
     // {
     //   title: 'Actions',
     //   key: 'actions',
