@@ -93,7 +93,7 @@ const BookingDetails = () => {
                   {dayjs(booking?.date).format('DD-MM-YYYY')}
                 </Descriptions.Item>
                 <Descriptions.Item label="Time">
-                  {booking?.startTime} - {booking?.endTime}
+                  {booking?.timeSlot}
                 </Descriptions.Item>
                 <Descriptions.Item label="Payable Amount">
                   ${booking?.payableAmount.toFixed(2)}

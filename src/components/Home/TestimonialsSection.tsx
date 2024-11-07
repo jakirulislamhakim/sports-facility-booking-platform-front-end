@@ -5,7 +5,10 @@ import { useMobileResponsive } from '../../hooks/useMobileResponsive';
 import SectionTitle from '../UI/SectionTitle';
 import ResponsiveContainer from '../../utils/ResponsiveContainer';
 import { useState } from 'react';
-import { useAddATestimonialsMutation, useGetAllTestimonialsQuery } from '../../redux/features/testomonials/testonialsApi';
+import {
+  useAddATestimonialsMutation,
+  useGetAllTestimonialsQuery,
+} from '../../redux/features/testomonials/testonialsApi';
 import { TApiErrorResponse, TTestimonial } from '../../types';
 import ShareUserExperienceModal from './ShareUserExperienceModal';
 import { SubmitHandler } from 'react-hook-form';
@@ -93,7 +96,7 @@ const TestimonialsSection = () => {
         title="What Our Users Say"
         description=" Read testimonials from sports enthusiasts who have used our platform"
       />
-      <Marquee pauseOnHover={true} delay={5}>
+      <Marquee pauseOnHover={true} delay={3}>
         <div
           style={{
             display: 'flex',

@@ -11,8 +11,6 @@ import {
   Image,
   Space,
   DatePicker,
-  Modal,
-  List,
 } from 'antd';
 import {
   DollarCircleOutlined,
@@ -20,13 +18,15 @@ import {
   ClockCircleOutlined,
   CalendarOutlined,
 } from '@ant-design/icons';
-import { useMobileResponsive } from '../../hooks/useMobileResponsive';
-import { useGetSingleFacilityQuery } from '../../redux/features/facilities/facilitiesApi';
+import { useMobileResponsive } from '../hooks/useMobileResponsive';
+import { useGetSingleFacilityQuery } from '../redux/features/facilities/facilitiesApi';
 import { useParams } from 'react-router-dom';
-import Loading from '../../components/UI/Loading';
+import Loading from '../components/UI/Loading';
 import dayjs from 'dayjs';
 import { useState } from 'react';
-import { useAvailableTimeSlotQuery } from '../../redux/features/user/userBookingsApi';
+import { useAvailableTimeSlotQuery } from '../redux/features/user/userBookingsApi';
+import CheckAvailabilityModal from '../components/FacilityDetails/CheckAvailabilityModal';
+import BookingFormModal from '../components/FacilityDetails/BookingFormModal';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -38,7 +38,9 @@ today.setMonth(today.getMonth() + 3);
 const next3Month = today.toLocaleDateString('en-CA');
 
 const FacilityDetails = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isOpenCheckAvailabilityModal, setIsOpenCheckAvailabilityModal] =
+    useState<boolean>(false);
+  const [isOpenBookingModal, setIsOpenBookingModal] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [dateRequiredError, setDateRequiredError] = useState<string>('');
   const { facilityId } = useParams();
@@ -63,19 +65,25 @@ const FacilityDetails = () => {
 
   const isMobile = useMobileResponsive();
 
-  const showModal = () => {
+  // CheckAvailabilityModal open
+  const showCheckAvailabilityModal = () => {
     if (!selectedDate) {
       return setDateRequiredError('Please select a date');
     }
-    setIsModalOpen(true);
+    setIsOpenCheckAvailabilityModal(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
+  const handleCloseCheckAvailabilityModal = () => {
+    setIsOpenCheckAvailabilityModal(false);
   };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  // CheckAvailabilityModal open
+  const showBookingModal = () => {
+    setIsOpenBookingModal(true);
+  };
+
+  const handleCloseBookingModal = () => {
+    setIsOpenBookingModal(false);
   };
 
   return (
@@ -126,7 +134,11 @@ const FacilityDetails = () => {
                   md={8}
                   style={{ textAlign: isMobile ? 'left' : 'right' }}
                 >
-                  <Button type="primary" size={isMobile ? 'small' : 'large'}>
+                  <Button
+                    onClick={showBookingModal}
+                    type="primary"
+                    size={isMobile ? 'small' : 'large'}
+                  >
                     Book Now
                   </Button>
                 </Col>
@@ -255,7 +267,7 @@ const FacilityDetails = () => {
                     </Text>
                   )}
                   <Button
-                    onClick={showModal}
+                    onClick={showCheckAvailabilityModal}
                     type="primary"
                     block
                     size={isMobile ? 'small' : 'large'}
@@ -295,30 +307,19 @@ const FacilityDetails = () => {
       </div>
 
       {/* modal for show available facility slot */}
-      <Modal
-        title={`Available slot for ${facility?.name}`}
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        loading={timeSlotLoading}
-        footer={null}
-      >
-        <div>
-          {availableTimeSlots?.length > 0 ? (
-            <div style={{ marginTop: '20px' }}>
-              <List
-                bordered
-                dataSource={availableTimeSlots}
-                renderItem={(slot) => <List.Item>{slot}</List.Item>}
-              />
-            </div>
-          ) : (
-            <Text type="danger" style={{ marginTop: '20px' }}>
-              No available slots for this date.
-            </Text>
-          )}
-        </div>
-      </Modal>
+      <CheckAvailabilityModal
+        availableTimeSlots={availableTimeSlots}
+        facilityName={facility?.name}
+        handleCloseCheckAvailabilityModal={handleCloseCheckAvailabilityModal}
+        isOpenCheckAvailabilityModal={isOpenCheckAvailabilityModal}
+        timeSlotLoading={timeSlotLoading}
+      />
+
+      <BookingFormModal
+        facilityId={facility?._id}
+        isOpenBookingModal={isOpenBookingModal}
+        handleCloseBookingModal={handleCloseBookingModal}
+      />
     </Loading>
   );
 };

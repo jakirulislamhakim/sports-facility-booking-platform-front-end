@@ -2,7 +2,7 @@ import { RouteObject } from 'react-router-dom';
 import AddFacilityForm from '../pages/admin/AddFacilityForm';
 import BookingsTable from '../pages/admin/BookingTable';
 import CreateAdmin from '../pages/admin/CreateAdmin';
-import FacilityDetails from '../pages/admin/FacilityDetails';
+import FacilityDetails from '../pages/FacilityDetails';
 import FacilityTable from '../pages/admin/FacilityTable';
 import FacilityUpdate from '../pages/admin/FacilityUpdate';
 import WelcomePage from '../pages/WelcomePage';

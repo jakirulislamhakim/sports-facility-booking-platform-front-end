@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Menu, Button, Drawer, Avatar } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 import '../../styles/navbar.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
 import { logoutUser } from '../../redux/features/auth/authSlice';
@@ -13,9 +13,11 @@ const Navbar = () => {
   const [visible, setVisible] = useState(false);
   const user = useAppSelector((state: RootState) => state.auth.user);
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
-  // Use react-responsive to detect if the screen width is 768px or less
-  // const isMobile = useMediaQuery({ maxWidth: 768 });
+  // for track active nav menu
+  const [, currentKeys] = location.pathname.split('/');
+
   const isMobile = useMobileResponsive();
 
   // Handle drawer open/close
@@ -32,8 +34,8 @@ const Navbar = () => {
     { key: 'home', label: <NavLink to={'/'}>Home</NavLink> },
     { key: 'facilities', label: <NavLink to={'/facilities'}>Facilities</NavLink> },
     { key: 'dashboard', label: <NavLink to={'/dashboard'}>Dashboard</NavLink> },
-    { key: 'about', label: <NavLink to={'/about-us'}>About Us</NavLink> },
-    { key: 'contact', label: <NavLink to={'/contact-us'}>Contact Us</NavLink> },
+    { key: 'about-us', label: <NavLink to={'/about-us'}>About Us</NavLink> },
+    { key: 'contact-us', label: <NavLink to={'/contact-us'}>Contact Us</NavLink> },
   ];
 
   const handleLogoutUser = () => {
@@ -57,6 +59,7 @@ const Navbar = () => {
             <Menu
               mode="horizontal"
               defaultSelectedKeys={['home']}
+              selectedKeys={[currentKeys || 'home']}
               className="desktop-menu"
               items={menuItems}
               style={{ width: '500px' }}
@@ -76,6 +79,8 @@ const Navbar = () => {
           <Drawer title="MyLogo" placement="right" open={visible} onClose={onClose}>
             <Menu
               mode="vertical"
+              onClick={() => setVisible(false)}
+              selectedKeys={[currentKeys || 'home']}
               items={[
                 ...menuItems,
                 { key: 'login', label: <Button type="primary">Login</Button> },

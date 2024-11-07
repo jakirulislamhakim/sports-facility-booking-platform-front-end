@@ -57,7 +57,15 @@ const Facilities = () => {
 
   const facilities = data?.data as TFacility[];
 
-  const onSearch: SearchProps['onSearch'] = (value) => setSearchTerm(value);
+  const onSearch: SearchProps['onSearch'] = (value) => {
+    setSearchTerm(value);
+    setPage('1');
+  };
+
+  const handleSelect = (value: string) => {
+    setSelectedOptions(value);
+    setPage('1');
+  };
 
   return (
     <div style={{ minHeight: '90vh' }}>
@@ -93,7 +101,7 @@ const Facilities = () => {
                 size={useBreakpoint().xs ? 'small' : 'middle'}
                 style={{ width: '100%' }}
                 options={selectOptions}
-                onChange={setSelectedOptions}
+                onChange={handleSelect}
                 disabled={isError}
               />
             </Col>

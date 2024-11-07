@@ -13,7 +13,7 @@ import UnauthorizedPage from '../pages/UnauthorizedPage';
 import userRoutes from './userRoutes';
 import adminRoutes from './adminRoutes';
 import Facilities from '../pages/Facilities';
-import FacilityDetails from '../pages/admin/FacilityDetails';
+import FacilityDetails from '../pages/FacilityDetails';
 
 const router = createBrowserRouter([
   {
