@@ -93,7 +93,7 @@ const BookingFormModal = ({
           render={({ field, fieldState: { error } }) => {
             return (
               <Form.Item
-                label={'Select a time slot'}
+                label={'Available time slot'}
                 help={error ? error.message : null}
                 validateStatus={error ? 'error' : ''}
               >

@@ -7,14 +7,17 @@ import { Provider } from 'react-redux';
 import { persistor, store } from './redux/store';
 import { Toaster } from 'sonner';
 import { PersistGate } from 'redux-persist/integration/react';
+import { HelmetProvider } from 'react-helmet-async';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <RouterProvider router={router} />
-      </PersistGate>
-    </Provider>
-    <Toaster position="top-center" duration={2000} richColors />
+    <HelmetProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <RouterProvider router={router} />
+        </PersistGate>
+      </Provider>
+      <Toaster position="top-center" duration={2000} richColors />
+    </HelmetProvider>
   </StrictMode>
 );

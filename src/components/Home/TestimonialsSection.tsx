@@ -1,4 +1,4 @@
-import { Card, Rate, Avatar, Row, Button, notification } from 'antd';
+import { Card, Rate, Avatar, Row, Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import Marquee from 'react-fast-marquee';
 import { useMobileResponsive } from '../../hooks/useMobileResponsive';
@@ -15,13 +15,14 @@ import { SubmitHandler } from 'react-hook-form';
 import { toast } from 'sonner';
 import { useAppSelector } from '../../redux/hooks';
 import { currentToken, currentUser } from '../../redux/features/auth/authSlice';
-import { useNavigate } from 'react-router-dom';
+import useShowLoginAlertNotification from '../../hooks/useLoginAlertForProtectedRoute';
 
 const TestimonialsSection = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const user = useAppSelector(currentUser);
   const token = useAppSelector(currentToken);
-  const navigate = useNavigate();
+
+  const showNotification = useShowLoginAlertNotification();
 
   const [imgErrors, setImgErrors] = useState<{ [key: string]: boolean }>({});
   const [addTestimonial] = useAddATestimonialsMutation();
@@ -40,7 +41,7 @@ const TestimonialsSection = () => {
 
   const handleShareExperience = async () => {
     if (!token && !user) {
-      return showLoginNotification();
+      return showNotification('Please login to share your experience with us.s');
       // navigate('/login');
     } else {
       setIsModalVisible(true);
@@ -63,31 +64,6 @@ const TestimonialsSection = () => {
       const err = error as TApiErrorResponse;
       toast.error(err.data.message);
     }
-  };
-
-  // for open notification when user is not logged in
-  const showLoginNotification = () => {
-    notification.info({
-      message: 'You need to login',
-      description: 'Please login to share your experience with us.',
-      btn: (
-        <>
-          <Button
-            type="primary"
-            size="small"
-            onClick={() => {
-              notification.destroy('login');
-              navigate('/login');
-            }}
-          >
-            Login Now
-          </Button>
-        </>
-      ),
-      duration: 5000,
-      key: 'login',
-      placement: 'top',
-    });
   };
 
   return (

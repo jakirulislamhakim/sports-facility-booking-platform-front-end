@@ -17,6 +17,7 @@ import { TApiErrorResponse, TFacility } from '../../types';
 import { toast } from 'sonner';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import PageTitle from '../../components/Shared/PageTitle';
 
 const FacilityTable = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -152,25 +153,28 @@ const FacilityTable = () => {
   ];
 
   return (
-    <div style={{ width: '100%', overflow: 'auto', padding: '4px 12px' }}>
-      <Table
-        loading={isLoading}
-        columns={columns}
-        dataSource={facilityData}
-        rowKey="_id"
-        pagination={false}
-        scroll={{ x: isMobile ? 400 : undefined }}
-        size={isMobile ? 'small' : 'middle'}
-      />
-      <Modal
-        title="Are you sure you want to delete the facility ?"
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        okText="YES"
-        cancelText="NO"
-      ></Modal>
-    </div>
+    <>
+      <PageTitle title="FACILITY-TABLE" />
+      <div style={{ width: '100%', overflow: 'auto', padding: '4px 12px' }}>
+        <Table
+          loading={isLoading}
+          columns={columns}
+          dataSource={facilityData}
+          rowKey="_id"
+          pagination={false}
+          scroll={{ x: isMobile ? 400 : undefined }}
+          size={isMobile ? 'small' : 'middle'}
+        />
+        <Modal
+          title="Are you sure you want to delete the facility ?"
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          okText="YES"
+          cancelText="NO"
+        ></Modal>
+      </div>
+    </>
   );
 };
 

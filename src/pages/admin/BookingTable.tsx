@@ -5,6 +5,7 @@ import { useGetAdminBookingsAllFacilitiesQuery } from '../../redux/features/user
 import { TBookingData } from '../../types';
 import { useMobileResponsive } from '../../hooks/useMobileResponsive';
 import SectionTitle from '../../components/UI/SectionTitle';
+import PageTitle from '../../components/Shared/PageTitle';
 
 const { Text } = Typography;
 const { useBreakpoint } = Grid;
@@ -88,6 +89,8 @@ const BookingsTable = () => {
 
   return (
     <>
+      <PageTitle title="BOOKING-TABLE" />
+
       <SectionTitle
         title="Booking Management"
         description="Users Bookings: View or Manage users Reservations"

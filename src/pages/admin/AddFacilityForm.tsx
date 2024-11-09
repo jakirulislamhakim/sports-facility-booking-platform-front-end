@@ -14,6 +14,7 @@ import { useState } from 'react';
 import Title from 'antd/es/typography/Title';
 import { Divider } from 'antd';
 import FormRating from '../../components/Form/FormRating';
+import PageTitle from '../../components/Shared/PageTitle';
 
 const AddFacilityForm = () => {
   const [addAFacility, { isLoading }] = useAddAFacilityMutation();
@@ -49,56 +50,59 @@ const AddFacilityForm = () => {
   };
 
   return (
-    <div
-      style={{
-        maxWidth: '600px',
-        margin: '0 auto',
-        padding: '0px 12px',
-      }}
-    >
-      <Title level={3} style={{ textAlign: 'center', margin: '16px' }}>
-        Add New Facility
-      </Title>
-      <Divider></Divider>
-      <RootForm
-        key={formKey}
-        onSubmit={onSubmit}
-        resolver={zodResolver(addFacilityFormValidationSchema)}
+    <>
+      <PageTitle title="ADD-FACILITY" />
+      <div
+        style={{
+          maxWidth: '600px',
+          margin: '0 auto',
+          padding: '0px 12px',
+        }}
       >
-        {/* Facility Name */}
-        <FormInput label="Facility Name" name="name" placeHolder="Tennis Court" />
+        <Title level={3} style={{ textAlign: 'center', margin: '16px' }}>
+          Add New Facility
+        </Title>
+        <Divider></Divider>
+        <RootForm
+          key={formKey}
+          onSubmit={onSubmit}
+          resolver={zodResolver(addFacilityFormValidationSchema)}
+        >
+          {/* Facility Name */}
+          <FormInput label="Facility Name" name="name" placeHolder="Tennis Court" />
 
-        {/* Description */}
-        <FormTextArea
-          label="Description"
-          name="description"
-          placeHolder="Description of the facility"
-          rows={3}
-        />
+          {/* Description */}
+          <FormTextArea
+            label="Description"
+            name="description"
+            placeHolder="Description of the facility"
+            rows={3}
+          />
 
-        {/* Price Per Hour */}
-        <FormInputNumber
-          label="Price Per Hour"
-          name="pricePerHour"
-          placeHolder="$"
-        />
+          {/* Price Per Hour */}
+          <FormInputNumber
+            label="Price Per Hour"
+            name="pricePerHour"
+            placeHolder="$"
+          />
 
-        {/* Location */}
-        <FormInput
-          label="Location"
-          name="location"
-          placeHolder="e.g., 456 Sports Ave, Springfield"
-        />
+          {/* Location */}
+          <FormInput
+            label="Location"
+            name="location"
+            placeHolder="e.g., 456 Sports Ave, Springfield"
+          />
 
-        {/* rating */}
-        <FormRating />
+          {/* rating */}
+          <FormRating />
 
-        {/* Image Upload */}
-        <FromInputImage label="Facility Image" name="image" />
+          {/* Image Upload */}
+          <FromInputImage label="Facility Image" name="image" />
 
-        <FormSubmitBtn btnText="Add Facility" disabled={isLoading} />
-      </RootForm>
-    </div>
+          <FormSubmitBtn btnText="Add Facility" disabled={isLoading} />
+        </RootForm>
+      </div>
+    </>
   );
 };
 

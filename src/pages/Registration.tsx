@@ -13,6 +13,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useAppDispatch } from '../redux/hooks';
 import { setUser } from '../redux/features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
+import PageTitle from '../components/Shared/PageTitle';
 
 const { Title, Link, Text } = Typography;
 
@@ -54,6 +55,8 @@ const Registration = () => {
   };
 
   return (
+    <>
+    <PageTitle title="REGISTRATION" />
     <Row
       justify="center"
       align="middle"
@@ -107,7 +110,7 @@ const Registration = () => {
           </div>
         </div>
       </Col>
-    </Row>
+    </Row></>
   );
 };
 

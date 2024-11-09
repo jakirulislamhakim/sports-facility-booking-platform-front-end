@@ -1,6 +1,7 @@
 import { Button, Typography, Space, Row, Col, Result } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import PageTitle from '../components/Shared/PageTitle';
 
 const { Text } = Typography;
 
@@ -13,6 +14,7 @@ const ErrorPage = () => {
 
   return (
     <>
+      <PageTitle title="ERROR ⚠" />
       <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
         <Col>
           <Result
@@ -48,7 +50,7 @@ const ErrorPage = () => {
             </Space>
           </Row>
         </Col>
-      </Row>{' '}
+      </Row>
     </>
   );
 };

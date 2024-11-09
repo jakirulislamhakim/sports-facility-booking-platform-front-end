@@ -11,6 +11,7 @@ import { TApiErrorResponse, TBookingData } from '../../types';
 import { toast } from 'sonner';
 import { useMobileResponsive } from '../../hooks/useMobileResponsive';
 import SectionTitle from '../../components/UI/SectionTitle';
+import PageTitle from '../../components/Shared/PageTitle';
 
 const { Text } = Typography;
 const { useBreakpoint } = Grid;
@@ -105,7 +106,7 @@ const UserBookingsTable = () => {
     {
       title: 'Actions',
       key: 'actions',
-      align:'center',
+      align: 'center',
       render: (_, record) => (
         <Space size="small" direction={isMobile ? 'vertical' : 'horizontal'}>
           <Link to={`/dashboard/user/bookings/${record._id}`}>
@@ -131,6 +132,8 @@ const UserBookingsTable = () => {
 
   return (
     <>
+      <PageTitle title="BOOKING-TABLE" />
+
       <SectionTitle
         title="Booking Management"
         description="My Bookings: View or Manage Your Reservations"

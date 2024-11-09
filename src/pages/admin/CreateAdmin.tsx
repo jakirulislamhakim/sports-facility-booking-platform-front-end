@@ -10,6 +10,7 @@ import { registrationValidationSchema } from '../../validationSchema/registratio
 import FormInput from '../../components/Form/FormInput';
 import FormSubmitBtn from '../../components/Form/FormSubmitBtn';
 import { useState } from 'react';
+import PageTitle from '../../components/Shared/PageTitle';
 
 const { Title } = Typography;
 
@@ -37,55 +38,58 @@ const CreateAdmin = () => {
   };
 
   return (
-    <Row
-      justify="center"
-      align="middle"
-      style={{ minHeight: '80vh', backgroundColor: '#f0f2f5' }}
-    >
-      <Col xs={22} sm={20} md={16} lg={14} xl={8}>
-        <div
-          style={{
-            backgroundColor: '#fff',
-            padding: '40px',
-            borderRadius: '8px',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-          }}
-        >
-          {/* Login Page Title */}
-          <Title level={3} style={{ marginBottom: '24px', textAlign: 'center' }}>
-            Create An Account
-          </Title>
-
-          {/* Login Form */}
-          <RootForm
-            key={formKey}
-            onSubmit={onSubmit}
-            resolver={zodResolver(registrationValidationSchema)}
+    <>
+      <PageTitle title="CREATE-ADMIN" />
+      <Row
+        justify="center"
+        align="middle"
+        style={{ minHeight: '80vh', backgroundColor: '#f0f2f5' }}
+      >
+        <Col xs={22} sm={20} md={16} lg={14} xl={8}>
+          <div
+            style={{
+              backgroundColor: '#fff',
+              padding: '40px',
+              borderRadius: '8px',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+            }}
           >
-            <FormInput name="name" label="Name" placeHolder="Enter your name" />
-            <FormInput
-              name="phone"
-              label="Phone Number"
-              placeHolder="Enter your phone number"
-            />
-            <FormInput
-              name="address"
-              label="Address"
-              placeHolder="Enter your address"
-            />
-            <FormInput name="email" label="Email" placeHolder="Enter your email" />
-            <FormInput
-              name="password"
-              label="Password"
-              type="password"
-              placeHolder="Enter your password.."
-            />
+            {/* Login Page Title */}
+            <Title level={3} style={{ marginBottom: '24px', textAlign: 'center' }}>
+              Create An Account
+            </Title>
 
-            <FormSubmitBtn btnText="Create Admin" disabled={isLoading} />
-          </RootForm>
-        </div>
-      </Col>
-    </Row>
+            {/* Login Form */}
+            <RootForm
+              key={formKey}
+              onSubmit={onSubmit}
+              resolver={zodResolver(registrationValidationSchema)}
+            >
+              <FormInput name="name" label="Name" placeHolder="Enter your name" />
+              <FormInput
+                name="phone"
+                label="Phone Number"
+                placeHolder="Enter your phone number"
+              />
+              <FormInput
+                name="address"
+                label="Address"
+                placeHolder="Enter your address"
+              />
+              <FormInput name="email" label="Email" placeHolder="Enter your email" />
+              <FormInput
+                name="password"
+                label="Password"
+                type="password"
+                placeHolder="Enter your password.."
+              />
+
+              <FormSubmitBtn btnText="Create Admin" disabled={isLoading} />
+            </RootForm>
+          </div>
+        </Col>
+      </Row>
+    </>
   );
 };
 

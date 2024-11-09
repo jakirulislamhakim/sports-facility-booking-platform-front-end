@@ -18,6 +18,7 @@ import { Divider, Image } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import Loading from '../../components/UI/Loading';
 import { useEffect, useMemo, useState } from 'react';
+import PageTitle from '../../components/Shared/PageTitle';
 
 const FacilityUpdate = () => {
   const [formKey, setFormKey] = useState(0);
@@ -69,54 +70,62 @@ const FacilityUpdate = () => {
   };
 
   return (
-    <Loading isLoading={currentFacilityLoading}>
-      <div
-        style={{
-          maxWidth: '600px',
-          margin: '0 auto',
-          padding: '0px 12px',
-        }}
-      >
-        <Title level={3} style={{ textAlign: 'center', margin: '16px' }}>
-          Update The Facility
-        </Title>
-        <Divider></Divider>
-        <RootForm
-          onSubmit={onSubmit}
-          resolver={zodResolver(updateFacilityFormValidationSchema)}
-          disabled={currentFacilityLoading}
-          defaultValues={defaultValues}
-          key={formKey}
-        >
-          {/* Facility Name */}
-          <FormInput label="Facility Name" name="name" placeHolder="Tennis Court" />
-          {/* Description */}
-          <FormTextArea
-            label="Description"
-            name="description"
-            placeHolder="Description of the facility"
-            rows={3}
-          />
-          {/* Price Per Hour */}
-          <FormInputNumber
-            label="Price Per Hour"
-            name="pricePerHour"
-            placeHolder="$"
-          />
-          {/* Location */}
-          <FormInput
-            label="Location"
-            name="location"
-            placeHolder="e.g., 456 Sports Ave, Springfield"
-          />
+    <>
+      <PageTitle title="FACILITY-UPDATE" />
 
-          <Image width={100} src={image ? image : undefined} />
-          {/* Image Upload */}
-          <FromInputImage label="Facility Image" name="image" />
-          <FormSubmitBtn btnText="Update Facility" disabled={isLoading} />
-        </RootForm>
-      </div>
-    </Loading>
+      <Loading isLoading={currentFacilityLoading}>
+        <div
+          style={{
+            maxWidth: '600px',
+            margin: '0 auto',
+            padding: '0px 12px',
+          }}
+        >
+          <Title level={3} style={{ textAlign: 'center', margin: '16px' }}>
+            Update The Facility
+          </Title>
+          <Divider></Divider>
+          <RootForm
+            onSubmit={onSubmit}
+            resolver={zodResolver(updateFacilityFormValidationSchema)}
+            disabled={currentFacilityLoading}
+            defaultValues={defaultValues}
+            key={formKey}
+          >
+            {/* Facility Name */}
+            <FormInput
+              label="Facility Name"
+              name="name"
+              placeHolder="Tennis Court"
+            />
+            {/* Description */}
+            <FormTextArea
+              label="Description"
+              name="description"
+              placeHolder="Description of the facility"
+              rows={3}
+            />
+            {/* Price Per Hour */}
+            <FormInputNumber
+              label="Price Per Hour"
+              name="pricePerHour"
+              placeHolder="$"
+            />
+            {/* Location */}
+            <FormInput
+              label="Location"
+              name="location"
+              placeHolder="e.g., 456 Sports Ave, Springfield"
+            />
+
+            <Image width={100} src={image ? image : undefined} />
+            {/* Image Upload */}
+            <FromInputImage label="Facility Image" name="image" />
+            <FormSubmitBtn btnText="Update Facility" disabled={isLoading} />
+          </RootForm>
+        </div>
+      </Loading>
+    </>
   );
 };
 
