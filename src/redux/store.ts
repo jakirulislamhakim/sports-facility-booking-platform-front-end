@@ -16,7 +16,7 @@ export const store = configureStore({
     auth: authPersistReducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
-  //   devTools: // fixme devtool for production mode
+  devTools: process.env.NODE_ENV !== 'production',
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

@@ -9,13 +9,13 @@ export const userSidebarItems: MenuProps['items'] = [
     label: <NavLink to="/">Home</NavLink>,
   },
   {
-    key: 'user',
+    key: 'profile',
     icon: <UserOutlined />,
     label: <NavLink to="/dashboard/user/profile">User Profile</NavLink>,
   },
   {
-    key: 'booking',
+    key: 'bookings',
     icon: <VideoCameraOutlined />,
-    label: <NavLink to="/dashboard/user/Bookings">Bookings</NavLink>,
+    label: <NavLink to="/dashboard/user/bookings">Bookings</NavLink>,
   },
 ];

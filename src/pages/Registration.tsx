@@ -27,7 +27,6 @@ const Registration = () => {
     const toastId = toast.loading('Registrations....');
     try {
       const res = await registrationUser(data).unwrap();
-      console.log(res);
 
       if (res.success) {
         const { token, message } = res;
@@ -56,61 +55,62 @@ const Registration = () => {
 
   return (
     <>
-    <PageTitle title="REGISTRATION" />
-    <Row
-      justify="center"
-      align="middle"
-      style={{ height: '100vh', backgroundColor: '#f0f2f5' }}
-    >
-      <Col xs={22} sm={16} md={12} lg={8} xl={6}>
-        <div
-          style={{
-            backgroundColor: '#fff',
-            padding: '40px',
-            borderRadius: '8px',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-          }}
-        >
-          {/* Login Page Title */}
-          <Title level={3} style={{ marginBottom: '24px', textAlign: 'center' }}>
-            Create Your Account
-          </Title>
-
-          {/* Login Form */}
-          <RootForm
-            onSubmit={onSubmit}
-            resolver={zodResolver(registrationValidationSchema)}
+      <PageTitle title="REGISTRATION" />
+      <Row
+        justify="center"
+        align="middle"
+        style={{ height: '100vh', backgroundColor: '#f0f2f5' }}
+      >
+        <Col xs={22} sm={16} md={12} lg={8} xl={6}>
+          <div
+            style={{
+              backgroundColor: '#fff',
+              padding: '40px',
+              borderRadius: '8px',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+            }}
           >
-            <FormInput name="name" label="Name" placeHolder="Enter your name" />
-            <FormInput
-              name="phone"
-              label="Phone Number"
-              placeHolder="Enter your phone number"
-            />
-            <FormInput
-              name="address"
-              label="Address"
-              placeHolder="Enter your address"
-            />
-            <FormInput name="email" label="Email" placeHolder="Enter your email" />
-            <FormInput
-              name="password"
-              label="Password"
-              type="password"
-              placeHolder="Enter your password.."
-            />
+            {/* Login Page Title */}
+            <Title level={3} style={{ marginBottom: '24px', textAlign: 'center' }}>
+              Create Your Account
+            </Title>
 
-            <FormSubmitBtn btnText="Registration" disabled={isLoading} />
-          </RootForm>
+            {/* Login Form */}
+            <RootForm
+              onSubmit={onSubmit}
+              resolver={zodResolver(registrationValidationSchema)}
+            >
+              <FormInput name="name" label="Name" placeHolder="Enter your name" />
+              <FormInput
+                name="phone"
+                label="Phone Number"
+                placeHolder="Enter your phone number"
+              />
+              <FormInput
+                name="address"
+                label="Address"
+                placeHolder="Enter your address"
+              />
+              <FormInput name="email" label="Email" placeHolder="Enter your email" />
+              <FormInput
+                name="password"
+                label="Password"
+                type="password"
+                placeHolder="Enter your password.."
+              />
 
-          {/* Registration Link */}
-          <div style={{ textAlign: 'center' }}>
-            <Text>Already have an account? </Text>
-            <Link href="/login">Login here</Link>
+              <FormSubmitBtn btnText="Registration" disabled={isLoading} />
+            </RootForm>
+
+            {/* Registration Link */}
+            <div style={{ textAlign: 'center' }}>
+              <Text>Already have an account? </Text>
+              <Link href="/login">Login here</Link>
+            </div>
           </div>
-        </div>
-      </Col>
-    </Row></>
+        </Col>
+      </Row>
+    </>
   );
 };
 

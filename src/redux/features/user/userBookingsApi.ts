@@ -2,6 +2,14 @@ import { baseApi } from '../../api/baseApi';
 
 const userBookingsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    createUserBookingFacility: builder.mutation({
+      query: (body) => ({
+        url: `/bookings`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['bookings'],
+    }),
     getUserBookingsFacilities: builder.query({
       query: () => ({
         url: '/bookings/user',
@@ -28,9 +36,10 @@ const userBookingsApi = baseApi.injectEndpoints({
         url: `/check-availability?date=${arg.date}&facility=${arg.facility} `,
         method: 'GET',
       }),
+      providesTags: ['bookings']
     }),
 
-    //! this is for admin get all booking
+    //!* this is for admin get all booking
     getAdminBookingsAllFacilities: builder.query({
       query: () => ({
         url: '/bookings',
@@ -42,6 +51,7 @@ const userBookingsApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useCreateUserBookingFacilityMutation,
   useGetUserBookingsFacilitiesQuery,
   useGetUserSingleBookingFacilityQuery,
   useCancelUserBookingFacilityMutation,

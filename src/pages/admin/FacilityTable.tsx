@@ -35,7 +35,6 @@ const FacilityTable = () => {
     const toastId = toast.loading('Deleing facility...', { id: 1 });
     try {
       const res = await removeAFacility(facilityId).unwrap();
-      console.log(res);
 
       if (res.success) {
         toast.success(res.message, { id: toastId });

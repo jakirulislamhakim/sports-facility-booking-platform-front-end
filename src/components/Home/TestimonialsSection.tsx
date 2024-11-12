@@ -52,10 +52,8 @@ const TestimonialsSection = () => {
   const handleModalSubmit: SubmitHandler<
     Pick<TTestimonial, 'feedback' | 'rating'>
   > = async (formData) => {
-    console.log(formData);
     try {
       const res = await addTestimonial(formData).unwrap();
-      console.log(res);
       if (res.success) {
         toast.success(res.message);
       }

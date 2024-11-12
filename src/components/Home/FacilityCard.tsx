@@ -51,7 +51,7 @@ const FacilityCard = ({ facility, isLoading = false }: TFacilityCardProps) => {
               type="link"
               key="book"
             >
-              Book Now <ArrowRightOutlined />
+              See Details <ArrowRightOutlined />
             </Button>,
           ]}
         >

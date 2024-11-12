@@ -14,6 +14,7 @@ import userRoutes from './userRoutes';
 import adminRoutes from './adminRoutes';
 import Facilities from '../pages/Facilities';
 import FacilityDetails from '../pages/FacilityDetails';
+import PaymentSuccess from '../pages/payment/Payment';
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,14 @@ const router = createBrowserRouter([
   {
     path: '/unauthorized',
     element: <UnauthorizedPage />,
+  },
+  {
+    path: 'payment/:status',
+    element: (
+      <ProtectedRoute allowedRoles={['user']}>
+        <PaymentSuccess />
+      </ProtectedRoute>
+    ),
   },
 ]);
 

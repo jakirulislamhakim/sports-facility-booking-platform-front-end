@@ -25,8 +25,6 @@ const LoginForm = () => {
 
   const path = location.state?.from?.pathname || '/';
 
-  console.log({ path });
-
   // form submission
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     // Handle login logic here

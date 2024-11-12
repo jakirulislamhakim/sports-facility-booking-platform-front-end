@@ -1,13 +1,18 @@
-import { DatePicker, Empty, Form, Modal, Select } from 'antd';
+import { DatePicker, Empty, Form, Modal, Row, Select } from 'antd';
 import { Controller, FieldValues, SubmitHandler } from 'react-hook-form';
 import RootForm from '../Form/RootForm';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import FormSubmitBtn from '../Form/FormSubmitBtn';
 import { DollarOutlined } from '@ant-design/icons';
-import { useAvailableTimeSlotQuery } from '../../redux/features/user/userBookingsApi';
+import {
+  useAvailableTimeSlotQuery,
+  useCreateUserBookingFacilityMutation,
+} from '../../redux/features/user/userBookingsApi';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
+import { TApiErrorResponse } from '../../types';
 
 const dateFormat = 'YYYY-MM-DD';
 const today = new Date();
@@ -18,6 +23,7 @@ const next3Month = today.toLocaleDateString('en-CA');
 
 type TBookingFormModalProps = {
   facilityId: string;
+  bookingAmount: string;
   isOpenBookingModal: boolean;
   handleCloseBookingModal: () => void;
 };
@@ -31,34 +37,42 @@ const bookingFormModalValidationSchema = z.object({
 
 const BookingFormModal = ({
   facilityId,
+  bookingAmount,
   isOpenBookingModal,
   handleCloseBookingModal,
 }: TBookingFormModalProps) => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const { data: availableTimeSlotData, isLoading: timeSlotLoading } =
     useAvailableTimeSlotQuery(
-      {
-        date: selectedDate as string,
-        facility: facilityId,
-      },
-      {
-        // skip when not given selectedDate
-        skip: !selectedDate,
-      }
+      { date: selectedDate as string, facility: facilityId },
+      { skip: !selectedDate } // skip when not given selectedDate
     );
 
-  const handleSubmitBookingForm: SubmitHandler<FieldValues> = (data) => {
+  const [createBookings] = useCreateUserBookingFacilityMutation();
+
+  // submit booking
+  const handleSubmitBookingForm: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading('Booking Facility...', { id: 17 });
+
     const bookingData = {
       ...data,
       date: selectedDate,
       facility: facilityId,
     };
 
-    // TODO :  do booking operation
+    try {
+      const res = await createBookings(bookingData).unwrap();
 
-    // close modal when booking done
-    handleCloseBookingModal();
-    console.log(bookingData);
+      if (res.success && res.data.payment_url) {
+        window.location.href = res.data.payment_url;
+      }
+
+      toast.error(res?.data, { id: toastId });
+    } catch (error) {
+      const err = error as TApiErrorResponse;
+      if (error instanceof Error) toast.error(error.message, { id: toastId });
+      toast.error(err.data.message, { id: toastId });
+    }
   };
 
   const availableTimeSlots: string[] = availableTimeSlotData?.data?.timeSlot;
@@ -122,8 +136,13 @@ const BookingFormModal = ({
 
         <FormSubmitBtn
           disabled={!selectedDate}
-          btnText="Proceed to checkout"
-          icon={<DollarOutlined style={{ fontSize: '20px' }} />}
+          btnText={`Proceed to checkout`}
+          icon={
+            <Row justify={'center'} align={'middle'}>
+              <span>{bookingAmount} </span>
+              <DollarOutlined style={{ fontSize: '18px', marginLeft: '4px' }} />
+            </Row>
+          }
         />
       </RootForm>
     </Modal>

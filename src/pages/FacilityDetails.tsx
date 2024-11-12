@@ -92,7 +92,7 @@ const FacilityDetails = () => {
   // CheckAvailabilityModal open
   const showBookingModal = () => {
     if (!token || !user) {
-      showNotification('You need to must must for booking facility');
+      showNotification('You need to must login for booking facility');
     } else {
       setIsOpenBookingModal(true);
     }
@@ -341,6 +341,7 @@ const FacilityDetails = () => {
 
         <BookingFormModal
           facilityId={facility?._id}
+          bookingAmount={facility?.pricePerHour}
           isOpenBookingModal={isOpenBookingModal}
           handleCloseBookingModal={handleCloseBookingModal}
         />

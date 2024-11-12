@@ -101,8 +101,11 @@ const BookingDetails = () => {
                   <Descriptions.Item label="Payable Amount">
                     ${booking?.payableAmount.toFixed(2)}
                   </Descriptions.Item>
-                  <Descriptions.Item label="Status">
+                  <Descriptions.Item label="Booking Status">
                     <Text strong>{booking?.isBooked}</Text>
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Payment Status">
+                    <Text strong>{booking?.paymentStatus}</Text>
                   </Descriptions.Item>
                 </Descriptions>
               </Col>

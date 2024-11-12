@@ -56,7 +56,9 @@ const AddFacilityForm = () => {
         style={{
           maxWidth: '600px',
           margin: '0 auto',
-          padding: '0px 12px',
+          padding: '8px 12px',
+          background: '#fff',
+          borderRadius: '8px'
         }}
       >
         <Title level={3} style={{ textAlign: 'center', margin: '16px' }}>

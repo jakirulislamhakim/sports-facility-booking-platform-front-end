@@ -58,11 +58,20 @@ const BookingsTable = () => {
       render: (amount: number) => `$${amount.toFixed(2)}`,
     },
     {
-      title: 'Status',
+      title: 'Booking Status',
       dataIndex: 'isBooked',
       key: 'isBooked',
       render: (status: string) => {
         const color = status === 'confirmed' ? 'green' : 'red';
+        return <Tag color={color}>{status.toUpperCase()}</Tag>;
+      },
+    },
+    {
+      title: 'Payment Status',
+      dataIndex: 'paymentStatus',
+      key: 'paymentStatus',
+      render: (status: string) => {
+        const color = status === 'paid' ? 'green' : 'red';
         return <Tag color={color}>{status.toUpperCase()}</Tag>;
       },
     },

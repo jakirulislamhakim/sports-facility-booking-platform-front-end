@@ -15,7 +15,7 @@ export const adminSidebarItems: MenuProps['items'] = [
     label: <NavLink to="/">Home</NavLink>,
   },
   {
-    key: 'admin',
+    key: 'profile',
     icon: <UserOutlined />,
     label: <NavLink to="/dashboard/admin/profile">Admin Profile</NavLink>,
   },
@@ -25,7 +25,7 @@ export const adminSidebarItems: MenuProps['items'] = [
     label: 'Facility Management',
     children: [
       {
-        key: 'addFacility',
+        key: 'add-facility',
         label: <NavLink to="/dashboard/admin/add-facility">Add Facility</NavLink>,
       },
       {
