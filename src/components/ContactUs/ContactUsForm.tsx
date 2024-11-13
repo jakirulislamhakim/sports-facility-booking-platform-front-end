@@ -13,7 +13,7 @@ import { useState } from 'react';
 
 const ContactUsForm = () => {
   const [formKey, setFormKey] = useState(0);
-  const [sendUserMessage] = useSendUserMessageMutation();
+  const [sendUserMessage, { isLoading }] = useSendUserMessageMutation();
 
   // contactUs form submission
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -69,7 +69,8 @@ const ContactUsForm = () => {
             />
 
             <FormSubmitBtn
-              btnText="Send Message"
+              disabled={isLoading}
+              btnText={isLoading ? 'Sending...' : 'Send Message'}
               // disabled={isLoading}
             />
           </RootForm>

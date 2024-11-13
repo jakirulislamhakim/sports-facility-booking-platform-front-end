@@ -9,7 +9,7 @@ const { Title } = Typography;
 const { Header, Content } = Layout;
 
 const DashboardLayout = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState<boolean>(false);
   const isMobile = useMobileResponsive();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const DashboardLayout = () => {
           open={!collapsed}
           width={280}
         >
-          <Sidebar collapsed={false} />
+          <Sidebar collapsed={false} setCollapsed={setCollapsed} />
         </Drawer>
       ) : (
         <Sidebar collapsed={collapsed} />

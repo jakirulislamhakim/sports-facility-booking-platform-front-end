@@ -43,6 +43,24 @@ const Navbar = () => {
     toast.success('Logout Successfully');
   };
 
+  const loginMenuItemForMobile = user
+    ? {
+        key: 'login',
+        label: (
+          <Button onClick={handleLogoutUser} type="primary">
+            Logout
+          </Button>
+        ),
+      }
+    : {
+        key: 'login',
+        label: (
+          <NavLink to={'/login'}>
+            <Button type="primary">Login</Button>
+          </NavLink>
+        ),
+      };
+
   return (
     <div style={{ backgroundColor: '#AEF0BA' }}>
       <nav className="navbar" style={{ margin: 'auto' }}>
@@ -81,10 +99,7 @@ const Navbar = () => {
               mode="vertical"
               onClick={() => setVisible(false)}
               selectedKeys={[currentKeys || 'home']}
-              items={[
-                ...menuItems,
-                { key: 'login', label: <Button type="primary">Login</Button> },
-              ]}
+              items={[...menuItems, loginMenuItemForMobile]}
             />
           </Drawer>
         </div>

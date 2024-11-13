@@ -48,7 +48,7 @@ const BookingFormModal = ({
       { skip: !selectedDate } // skip when not given selectedDate
     );
 
-  const [createBookings] = useCreateUserBookingFacilityMutation();
+  const [createBookings, { isLoading }] = useCreateUserBookingFacilityMutation();
 
   // submit booking
   const handleSubmitBookingForm: SubmitHandler<FieldValues> = async (data) => {
@@ -70,8 +70,8 @@ const BookingFormModal = ({
       toast.error(res?.data, { id: toastId });
     } catch (error) {
       const err = error as TApiErrorResponse;
-      if (error instanceof Error) toast.error(error.message, { id: toastId });
-      toast.error(err.data.message, { id: toastId });
+      if (error instanceof Error) toast.error(error?.message, { id: toastId });
+      toast.error(err?.data?.message, { id: toastId });
     }
   };
 
@@ -135,7 +135,7 @@ const BookingFormModal = ({
         />
 
         <FormSubmitBtn
-          disabled={!selectedDate}
+          disabled={!selectedDate || isLoading}
           btnText={`Proceed to checkout`}
           icon={
             <Row justify={'center'} align={'middle'}>

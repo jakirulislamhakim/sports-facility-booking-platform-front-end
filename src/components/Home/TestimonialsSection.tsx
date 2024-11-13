@@ -147,12 +147,13 @@ const TestimonialsSection = () => {
       {/* action btn for user share experience  */}
       <Row justify={'center'}>
         <Button
+          disabled={user?.role === 'admin'}
           size={isMobile ? 'small' : 'middle'}
           type="primary"
           style={{ marginTop: '20px' }}
           onClick={handleShareExperience}
         >
-          Share Your Experience
+          {user?.role === 'admin' ? "Admin can't share" : 'Share Your Experience'}
         </Button>
       </Row>
 

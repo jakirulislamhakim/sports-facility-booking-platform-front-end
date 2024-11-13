@@ -11,7 +11,12 @@ import { toast } from 'sonner';
 
 const { Sider } = Layout;
 
-const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
+type TSidebarProps = {
+  collapsed: boolean;
+  setCollapsed?: (param: boolean) => void;
+};
+
+const Sidebar = ({ collapsed, setCollapsed }: TSidebarProps) => {
   const token = useAppSelector(currentToken);
   const location = useLocation();
 
@@ -22,10 +27,16 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
   try {
     const decodedUser = jwtDecode(token!) as TAuthUser;
     if (decodedUser.role === 'admin') sidebarItems = adminSidebarItems;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     toast.error('invalid token');
   }
+
+  const handleMenuItemClick = () => {
+    if (setCollapsed) {
+      setCollapsed(true);
+    }
+  };
 
   return (
     <Sider
@@ -41,6 +52,7 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
       <Menu
         theme="light"
         mode="inline"
+        onClick={handleMenuItemClick}
         defaultSelectedKeys={['profile']}
         selectedKeys={[currentKeys || 'profile']}
         // set dynamic sidebar items for user and admin
